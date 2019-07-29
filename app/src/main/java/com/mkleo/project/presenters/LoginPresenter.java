@@ -1,6 +1,6 @@
 package com.mkleo.project.presenters;
 
-import com.mkleo.project.base.RxPresenter;
+import com.mkleo.project.base.BasePresenter;
 import com.mkleo.project.bean.http.LoginData;
 import com.mkleo.project.bean.http.base.Result;
 import com.mkleo.project.model.http.HttpFactory;
@@ -13,7 +13,7 @@ import com.mkleo.project.presenters.contracts.LoginContract;
  * by: Mk.leo
  * date: 2019/7/26
  */
-public class LoginPresenter extends RxPresenter<LoginContract.View> implements LoginContract.Presenter {
+public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
 
 
     @Override

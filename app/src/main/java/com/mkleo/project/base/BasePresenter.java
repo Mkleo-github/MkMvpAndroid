@@ -5,7 +5,7 @@ package com.mkleo.project.base;
  * by: Mk.leo
  * date: 2019/7/26
  */
-public class RxPresenter<V extends IView> implements IPresenter<V> {
+public class BasePresenter<V extends IView> implements IPresenter<V> {
 
     protected V mView;
 
