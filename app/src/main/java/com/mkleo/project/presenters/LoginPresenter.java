@@ -1,13 +1,12 @@
 package com.mkleo.project.presenters;
 
 import com.mkleo.project.base.RxPresenter;
-import com.mkleo.project.bean.LoginData;
-import com.mkleo.project.bean.base.Result;
+import com.mkleo.project.bean.http.LoginData;
+import com.mkleo.project.bean.http.base.Result;
 import com.mkleo.project.model.http.HttpFactory;
 import com.mkleo.project.model.http.rx.HttpObserver;
 import com.mkleo.project.model.http.rx.RxHandler;
 import com.mkleo.project.presenters.contracts.LoginContract;
-import com.mkleo.project.utils.MkLog;
 
 /**
  * des:

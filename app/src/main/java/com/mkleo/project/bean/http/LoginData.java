@@ -1,6 +1,6 @@
-package com.mkleo.project.bean;
+package com.mkleo.project.bean.http;
 
-import com.mkleo.project.bean.base.Result;
+import com.mkleo.project.bean.http.base.Result;
 
 /**
  * des:

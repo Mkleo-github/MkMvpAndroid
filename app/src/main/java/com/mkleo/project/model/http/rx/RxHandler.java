@@ -3,7 +3,7 @@ package com.mkleo.project.model.http.rx;
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
-import com.mkleo.project.bean.base.Result;
+import com.mkleo.project.bean.http.base.Result;
 import com.mkleo.project.model.http.HttpPolicy;
 import com.mkleo.project.utils.MkLog;
 

@@ -1,8 +1,8 @@
 package com.mkleo.project.model.http.service;
 
 
-import com.mkleo.project.bean.LoginData;
-import com.mkleo.project.bean.base.Result;
+import com.mkleo.project.bean.http.LoginData;
+import com.mkleo.project.bean.http.base.Result;
 import com.mkleo.project.model.http.service.base.IServiceProxy;
 import com.mkleo.project.model.http.service.base.ServiceWrapper;
 

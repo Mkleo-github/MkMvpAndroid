@@ -1,4 +1,4 @@
-package com.mkleo.project.bean.base;
+package com.mkleo.project.bean.http.base;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -55,11 +55,7 @@ public class Result<T extends Result.Data> implements Serializable {
         return this;
     }
 
-    /**
-     * des:
-     * by: Mk.leo
-     * date: 2019/7/27
-     */
+
     public static class Data implements Serializable {
 
     }
