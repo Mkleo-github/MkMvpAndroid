@@ -91,7 +91,7 @@ public abstract class BaseFragment extends Fragment implements IView {
      * @param msg
      */
     @Override
-    public void showTaost(final String msg) {
+    public void showToast(final String msg) {
         if (null == mActivity) return;
         mActivity.runOnUiThread(new Runnable() {
             @Override

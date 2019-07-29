@@ -18,7 +18,7 @@ import butterknife.Unbinder;
  * by: Mk.leo
  * date: 2019/7/26
  */
-public abstract class BaseActivity extends AppCompatActivity implements IView{
+public abstract class BaseActivity extends AppCompatActivity implements IView {
 
     protected Activity mActivity;
     /* butterknife */
@@ -78,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView{
      * @param msg
      */
     @Override
-    public void showTaost(final String msg) {
+    public void showToast(final String msg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

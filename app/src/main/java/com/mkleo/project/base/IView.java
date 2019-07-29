@@ -12,7 +12,7 @@ public interface IView {
      *
      * @param msg
      */
-    void showTaost(String msg);
+    void showToast(String msg);
 
     /**
      * 显示一个加载框
