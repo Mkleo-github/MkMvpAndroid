@@ -5,7 +5,7 @@ package com.mkleo.project.base;
  * by: Mk.leo
  * date: 2019/7/27
  */
-public  abstract class MvpFragment<T extends BasePresenter> extends BaseFragment implements IView {
+public  abstract class MvpFragment<T extends BasePresenter> extends BaseFragment  {
 
     /* 业务处理类 */
     protected T mPresenter;

@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.mkleo.project.utils.MkLog;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -20,7 +22,7 @@ import butterknife.Unbinder;
  * by: Mk.leo
  * date: 2019/7/27
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements IView {
 
     protected Activity mActivity;
 
@@ -88,7 +90,8 @@ public abstract class BaseFragment extends Fragment {
      *
      * @param msg
      */
-    public void showMsg(final String msg) {
+    @Override
+    public void showTaost(final String msg) {
         if (null == mActivity) return;
         mActivity.runOnUiThread(new Runnable() {
             @Override
@@ -104,6 +107,7 @@ public abstract class BaseFragment extends Fragment {
      * @param title
      * @param msg
      */
+    @Override
     public void showProgress(String title, String msg) {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
@@ -116,9 +120,14 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 取消加载提示
      */
+    @Override
     public void dismissProgress() {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
+    }
+
+    protected void printLog(String log) {
+        MkLog.print(getClass().getSimpleName(), log);
     }
 }

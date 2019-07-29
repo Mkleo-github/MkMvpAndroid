@@ -5,7 +5,7 @@ package com.mkleo.project.base;
  * by: Mk.leo
  * date: 2019/7/26
  */
-public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity implements IView {
+public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity  {
 
     /* 业务处理类 */
     protected T mPresenter;

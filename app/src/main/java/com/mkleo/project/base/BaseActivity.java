@@ -18,7 +18,7 @@ import butterknife.Unbinder;
  * by: Mk.leo
  * date: 2019/7/26
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IView{
 
     protected Activity mActivity;
     /* butterknife */
@@ -77,7 +77,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      * @param msg
      */
-    public void showMsg(final String msg) {
+    @Override
+    public void showTaost(final String msg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -92,6 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param title
      * @param msg
      */
+    @Override
     public void showProgress(String title, String msg) {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
@@ -104,6 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 取消加载提示
      */
+    @Override
     public void dismissProgress() {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
