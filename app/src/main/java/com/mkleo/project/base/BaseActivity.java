@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mkleo.project.app.App;
-import com.mkleo.project.model.eventbus.IEventReceiver;
 import com.mkleo.project.utils.MkLog;
 
 import butterknife.ButterKnife;
