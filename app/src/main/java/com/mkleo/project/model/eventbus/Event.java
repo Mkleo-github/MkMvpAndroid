@@ -14,7 +14,7 @@ public class Event<T> implements IEvent<T> {
     /* 数据 */
     private final T data;
 
-    private List<Class<?>> filters;
+    private String[] filters;
 
     public Event(String event) {
         this(event, null);
@@ -37,11 +37,11 @@ public class Event<T> implements IEvent<T> {
     }
 
 
-    void setFilters(List<Class<?>> filters) {
+    void setFilters(String... filters) {
         this.filters = filters;
     }
 
-    List<Class<?>> getFilters() {
+    String[] getFilters() {
         return filters;
     }
 }

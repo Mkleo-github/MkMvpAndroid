@@ -1,6 +1,8 @@
 package com.mkleo.project.model.eventbus;
 
 
+import android.support.annotation.NonNull;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
@@ -20,7 +22,8 @@ public class Eventer {
 
 
     /* 线程安全 */
-    private final Hashtable<Class<?>, Vector<IEventReceiver>> mReceivers = new Hashtable<>();
+    private final Hashtable<String, Vector<IEventReceiver<Event<?>>>> mReceivers
+            = new Hashtable<>();
 
     private Eventer() {
 
@@ -35,27 +38,27 @@ public class Eventer {
     }
 
     /* 接收器 */
-    private final EventReceiver<Event> mEventReceiver = new EventReceiver<Event>() {
+    private final EventReceiver<Event<?>> mEventReceiver = new EventReceiver<Event<?>>() {
 
         @Override
-        public void onEvent(Event event) {
+        public void onEvent(Event<?> event) {
             //获取过滤字段
-            final List<Class<?>> filters = event.getFilters();
+            final String[] filters = event.getFilters();
             if (null == filters) {
                 //发送给所有
-                for (Map.Entry<Class<?>, Vector<IEventReceiver>> entry : mReceivers.entrySet()) {
-                    for (IEventReceiver OnEvent : entry.getValue()) {
-                        OnEvent.onEvent(event);
+                for (Map.Entry<String, Vector<IEventReceiver<Event<?>>>> entry : mReceivers.entrySet()) {
+                    for (IEventReceiver<Event<?>> eventReceiver : entry.getValue()) {
+                        eventReceiver.onEvent(event);
                     }
                 }
                 return;
             }
 
-            for (Class<?> filter : filters) {
-                Vector<IEventReceiver> listeners = mReceivers.get(filter);
+            for (String filter : filters) {
+                Vector<IEventReceiver<Event<?>>> listeners = mReceivers.get(filter);
                 //分发消息
                 if (null != listeners) {
-                    for (IEventReceiver OnEvent : listeners) {
+                    for (IEventReceiver<Event<?>> OnEvent : listeners) {
                         OnEvent.onEvent(event);
                     }
                 }
@@ -72,11 +75,12 @@ public class Eventer {
     }
 
 
-    public void register(Class<?> filter, IEventReceiver listener) {
+    public void register(String filter, IEventReceiver<Event<?>> listener) {
 
+        if (null == listener) return;
         if (mReceivers.size() == 0) register();
 
-        Vector<IEventReceiver> listeners = mReceivers.get(filter);
+        Vector<IEventReceiver<Event<?>>> listeners = mReceivers.get(filter);
 
         if (null == listeners) {
             //说明该事件监听没有订阅过
@@ -84,17 +88,16 @@ public class Eventer {
             listeners.add(listener);
             mReceivers.put(filter, listeners);
         } else {
-            if (listeners.contains(listener)) {
-                return;
-            } else {
+            //每个监听只能订阅一次
+            if (!listeners.contains(listener)) {
                 listeners.add(listener);
             }
         }
 
     }
 
-    public void register(Object filter, IEventReceiver listener) {
-        this.register(filter.getClass(), listener);
+    public void register(Object filter, IEventReceiver<Event<?>> listener) {
+        this.register(filter.getClass().getSimpleName(), listener);
     }
 
 
@@ -104,9 +107,9 @@ public class Eventer {
      * @param filter
      * @param listener
      */
-    public void unregister(Class<?> filter, IEventReceiver listener) {
+    public void unregister(String filter, IEventReceiver<Event<?>> listener) {
 
-        Vector<IEventReceiver> listeners = mReceivers.get(filter);
+        Vector<IEventReceiver<Event<?>>> listeners = mReceivers.get(filter);
         if (null == listeners) {
             return;
         } else {
@@ -127,17 +130,34 @@ public class Eventer {
      * @param filter
      * @param listener
      */
-    public void unregister(Object filter, IEventReceiver listener) {
-        this.unregister(filter.getClass(), listener);
+    public void unregister(Object filter, IEventReceiver<Event<?>> listener) {
+        this.unregister(filter.getClass().getSimpleName(), listener);
     }
 
+
     /**
+     * 发送event
+     *
      * @param targets 目标位置
      * @param event
      */
-    public void post(Event event, Class<?>... targets) {
+    public void post(Event<?> event, Class... targets) {
+        String[] targetStrings = new String[targets.length];
+        for (int i = 0; i < targets.length; i++) {
+            targetStrings[i] = targets[i].getSimpleName();
+        }
+        post(event, targetStrings);
+    }
+
+    /**
+     * 发送event
+     *
+     * @param targets 目标位置
+     * @param event
+     */
+    public void post(Event<?> event, String... targets) {
         if (null == event) return;
-        event.setFilters(Arrays.asList(targets));
+        event.setFilters(targets);
         EventBus.getDefault().post(event);
     }
 
@@ -146,7 +166,7 @@ public class Eventer {
      *
      * @param event
      */
-    public void post(Event event) {
+    public void post(Event<?> event) {
         if (null == event) return;
         event.setFilters(null);
         EventBus.getDefault().post(event);
