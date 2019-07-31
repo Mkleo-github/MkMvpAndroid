@@ -5,7 +5,7 @@ package com.mkleo.project.base;
  * by: Mk.leo
  * date: 2019/7/26
  */
-public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity  {
+public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity {
 
     /* 业务处理类 */
     protected T mPresenter;
@@ -13,13 +13,13 @@ public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity 
     protected abstract T setPresenter();
 
     @Override
-    protected void initViewAndData() {
+    protected void onActivityCreate() {
+        super.onActivityCreate();
         //初始化Presenter
         mPresenter = setPresenter();
         if (null != mPresenter)
             mPresenter.attachView(this);
 
-        super.initViewAndData();
     }
 
     @Override

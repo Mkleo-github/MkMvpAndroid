@@ -44,21 +44,16 @@ public abstract class BaseFragment extends Fragment implements IView {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(setLayout(), null);
         return mView;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mUnbinder = ButterKnife.bind(this, view);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public final void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initViewAndData();
+        onFragmentCreate();
+        onFragmentReady();
     }
 
     @Override
@@ -81,9 +76,16 @@ public abstract class BaseFragment extends Fragment implements IView {
     protected abstract int setLayout();
 
     /**
-     * 初始化图形和数据
+     * fragment创建
      */
-    protected abstract void initViewAndData();
+    protected void onFragmentCreate(){
+        mUnbinder = ButterKnife.bind(this, mView);
+    }
+
+    /**
+     * fragment已经准备完毕
+     */
+    protected abstract void onFragmentReady();
 
     /**
      * 显示一个toast

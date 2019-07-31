@@ -35,17 +35,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(setLayout());
-        mActivity = this;
-        mUnbinder = ButterKnife.bind(this);
-        //4.4以上设置透明状态栏
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-//        }
-        //将Activity加入管理
-        App.getInstance().addActivity(this);
-
-        initViewAndData();
+        onActivityCreate();
+        onActivityReady();
     }
 
 
@@ -58,11 +49,23 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
 
 
     /**
-     * 初始化图形和数据
+     * activity创建
      */
-    protected void initViewAndData() {
+    protected void onActivityCreate() {
+        //4.4以上设置透明状态栏
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+//        }
 
+        //绑定bufferKnife
+        mUnbinder = ButterKnife.bind(this);
+        mActivity = this;
+        //将Activity加入管理
+        App.getInstance().addActivity(this);
     }
+
+    protected abstract void onActivityReady();
 
     @Override
     protected void onDestroy() {

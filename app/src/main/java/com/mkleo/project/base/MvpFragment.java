@@ -5,7 +5,7 @@ package com.mkleo.project.base;
  * by: Mk.leo
  * date: 2019/7/27
  */
-public  abstract class MvpFragment<T extends BasePresenter> extends BaseFragment  {
+public abstract class MvpFragment<T extends BasePresenter> extends BaseFragment {
 
     /* 业务处理类 */
     protected T mPresenter;
@@ -14,7 +14,8 @@ public  abstract class MvpFragment<T extends BasePresenter> extends BaseFragment
 
 
     @Override
-    protected void initViewAndData() {
+    protected void onFragmentCreate() {
+        super.onFragmentCreate();
         //初始化Presenter
         mPresenter = setPresenter();
         if (null != mPresenter)
@@ -26,5 +27,6 @@ public  abstract class MvpFragment<T extends BasePresenter> extends BaseFragment
         super.onDestroy();
         if (mPresenter != null)
             mPresenter.detachView();
+        mPresenter = null;
     }
 }
