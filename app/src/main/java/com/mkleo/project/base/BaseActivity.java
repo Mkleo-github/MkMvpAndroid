@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * des:无MVP的activity
+ * des:无presenter的activity
  * by: Mk.leo
  * date: 2019/7/26
  */

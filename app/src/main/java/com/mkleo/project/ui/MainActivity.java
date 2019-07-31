@@ -35,6 +35,11 @@ public class MainActivity extends MvpActivity<LoginPresenter> {
     }
 
     @Override
+    protected LoginPresenter setPresenter() {
+        return new LoginPresenter();
+    }
+
+    @Override
     protected void onActivityReady() {
 
         mPermissions = new Permissions(this, Constants.REQUEST_PERMISSIONS)
@@ -61,11 +66,6 @@ public class MainActivity extends MvpActivity<LoginPresenter> {
                     }
                 });
         mPermissions.requestPermisssion();
-    }
-
-    @Override
-    protected LoginPresenter setPresenter() {
-        return new LoginPresenter();
     }
 
 

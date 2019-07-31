@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * des:
+ * des:无presenter的fragment
  * by: Mk.leo
  * date: 2019/7/27
  */
