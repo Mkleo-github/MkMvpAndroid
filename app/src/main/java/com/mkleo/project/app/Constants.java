@@ -35,6 +35,6 @@ public class Constants {
         public static final String NET_CACHE = DATA + "/NetCache";
     }
 
-    public static final String MAIN_HOST = "https://dev.coolmitech.com/ST_Talk_Manage/";
+    public static final String MAIN_HOST = "https://www.baidu.com/";
 
 }
