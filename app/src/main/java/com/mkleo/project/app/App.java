@@ -9,6 +9,8 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import com.mkleo.project.model.http.HttpFactory;
+import com.mkleo.project.utils.CrashHandler;
+import com.mkleo.project.utils.MkLog;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,6 +40,8 @@ public class App extends Application {
         super.onCreate();
         sApp = this;
         mContext = getApplicationContext();
+        //初始化错误捕获
+        initCrashHandler();
         //获取屏幕宽高
         getScreenSize();
         //初始化HTTP
@@ -59,6 +63,16 @@ public class App extends Application {
 
     public Context getContext() {
         return mContext;
+    }
+
+    private void initCrashHandler(){
+        CrashHandler.init(new CrashHandler.OnCrashListener() {
+            @Override
+            public void onCrash(String crashMsg) {
+                //发生异常
+                MkLog.log(MkLog.LogLv.E,crashMsg);
+            }
+        });
     }
 
     /**
