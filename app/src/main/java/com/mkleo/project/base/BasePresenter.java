@@ -36,7 +36,7 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
      *
      * @param disposable
      */
-    protected void addDisposable(Disposable disposable) {
+    protected synchronized void addDisposable(Disposable disposable) {
         if (null == mCompositeDisposable)
             mCompositeDisposable = new CompositeDisposable();
         mCompositeDisposable.add(disposable);
