@@ -109,31 +109,4 @@
     <dimen name="text_size_30">30.0sp</dimen>
     <dimen name="text_size_40">40.0sp</dimen>
 
-    <!--腾讯云 TIM-->
-    <dimen name="fab_margin">16dp</dimen>
-
-    <!--h1-->
-    <dimen name="h1">9sp</dimen>
-    <!--h2-->
-    <dimen name="h2">10sp</dimen>
-    <!--h3-->
-    <dimen name="h3">11sp</dimen>
-    <!--h4-->
-    <dimen name="h4">12sp</dimen>
-    <!--h5-->
-    <dimen name="h5">13sp</dimen>
-    <!--h6-->
-    <dimen name="h6">14sp</dimen>
-    <!--h7-->
-    <dimen name="h7">15sp</dimen>
-    <!--h8-->
-    <dimen name="h8">16sp</dimen>
-    <!--h9-->
-    <dimen name="h9">17sp</dimen>
-    <!--h10-->
-    <dimen name="h10">18sp</dimen>
-    <!--h11-->
-    <dimen name="h11">19sp</dimen>
-
-    <dimen name="live_btn_size">35dp</dimen>
 </resources>
