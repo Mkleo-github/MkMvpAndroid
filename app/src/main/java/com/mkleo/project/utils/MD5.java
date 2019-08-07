@@ -89,7 +89,4 @@ public class MD5 {
         stringbuffer.append(c1);  
     }  
     
-    public static void main(String[] args) {
-		System.out.println(MD5.getMD5String("focus"));
-	}
-}  
+}

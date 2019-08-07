@@ -5,12 +5,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
 import com.mkleo.project.app.App;
 
+import java.io.File;
+
 public class SystemUtil {
+
+
+    /**
+     * 通知系统更新媒体文件
+     *
+     * @param context
+     * @param path
+     */
+    public static void notifySystemUpdateMedia(Context context, String path) {
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File file = new File(path);
+        Uri contentUri = Uri.fromFile(file);
+        intent.setData(contentUri);
+        context.sendBroadcast(intent);
+    }
 
     /**
      * 检查WIFI是否连接
