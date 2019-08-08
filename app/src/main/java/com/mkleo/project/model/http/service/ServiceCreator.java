@@ -1,4 +1,4 @@
-package com.mkleo.project.model.http.service.base;
+package com.mkleo.project.model.http.service;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
