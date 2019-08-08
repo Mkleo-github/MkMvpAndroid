@@ -33,6 +33,7 @@ public abstract class HttpObserver<T> implements Observer<T> {
             onError(rxException.getCode(), rxException.getErrMessage());
         } else {
             e.printStackTrace();
+            onError(e.hashCode(), "" + e.getMessage());
         }
         //会在执行结束后回收防止内存泄漏
         if (null != mDisposable && !mDisposable.isDisposed())
