@@ -27,6 +27,7 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
      * @return
      */
     protected V getView() {
+        if (null == mViewReference) return null;
         return mViewReference.get();
     }
 
