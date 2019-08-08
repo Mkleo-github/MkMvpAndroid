@@ -13,7 +13,7 @@ public interface PermissionCallback {
     void onPermissionsGranted();
 
     /**
-     * 说明有权限被拒绝或者不再询问(一定有没有勾选的被拒绝权限)
+     * 说明有权限被拒绝或者不再询问(一定存在 没有勾选 "不再询问" 的权限[也就是说可以再次请求获取])
      */
     void onSomePermissionsDeniedOrNeverAsk();
 
