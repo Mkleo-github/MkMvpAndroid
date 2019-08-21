@@ -1,7 +1,5 @@
 package com.mkleo.project.model.eventbus;
 
-import java.util.List;
-
 /**
  * des:
  * by: Mk.leo

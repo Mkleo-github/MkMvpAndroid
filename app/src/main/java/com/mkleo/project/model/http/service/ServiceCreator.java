@@ -18,7 +18,7 @@ class ServiceCreator {
         this.mOkHttpClient = okHttpClient;
     }
 
-    <T> T create(Class<T> clazz, String host) {
+    <T> T create(Class<T> service, String host) {
         if (null == mOkHttpClient) throw new RuntimeException("OkHttpClient uninitialized!");
         Retrofit gankRetrofit = new Retrofit.Builder()
                 .baseUrl(host)
@@ -26,7 +26,7 @@ class ServiceCreator {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        return gankRetrofit.create(clazz);
+        return gankRetrofit.create(service);
     }
 
 }

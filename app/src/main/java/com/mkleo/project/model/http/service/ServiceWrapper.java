@@ -39,7 +39,7 @@ public abstract class ServiceWrapper<T, P extends ServiceProxy<T>> {
             mServiceProxy = onCreateServiceProxy();
         if (mHost == null || !mHost.equals(host)) {
             mService = new ServiceCreator(mOkHttpClient)
-                    .create(mServiceProxy.getServiceFrom(), host);
+                    .create(mServiceProxy.getService(), host);
             mHost = host;
         }
     }

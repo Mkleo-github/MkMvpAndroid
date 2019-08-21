@@ -8,10 +8,10 @@ package com.mkleo.project.model.http.service;
 class ServiceProxy<T> {
 
     /* 实体原来 */
-    private final Class<T> mServiceFrom;
+    private final Class<T> mService;
 
-    ServiceProxy(Class<T> from) {
-        this.mServiceFrom = from;
+    ServiceProxy(Class<T> service) {
+        this.mService = service;
     }
 
     /**
@@ -19,7 +19,7 @@ class ServiceProxy<T> {
      *
      * @return
      */
-    Class<T> getServiceFrom() {
-        return mServiceFrom;
+    Class<T> getService() {
+        return mService;
     }
 }
