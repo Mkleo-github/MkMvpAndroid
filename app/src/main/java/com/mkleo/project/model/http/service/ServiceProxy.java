@@ -7,7 +7,7 @@ package com.mkleo.project.model.http.service;
  */
 class ServiceProxy<T> {
 
-    /* 实体原来 */
+    /* 访问服务 */
     private final Class<T> mService;
 
     ServiceProxy(Class<T> service) {

@@ -4,7 +4,7 @@ import com.mkleo.project.base.BasePresenter;
 import com.mkleo.project.bean.http.LoginData;
 import com.mkleo.project.bean.http.base.Result;
 import com.mkleo.project.model.http.HttpFactory;
-import com.mkleo.project.model.http.rx.HttpObserver;
+import com.mkleo.project.model.http.rx.RxReponse;
 import com.mkleo.project.model.http.rx.RxHandler;
 import com.mkleo.project.presenters.contracts.LoginContract;
 
@@ -24,7 +24,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                 .compose(RxHandler.<Result<LoginData>>resultOnMainThread())
                 .compose(RxHandler.<LoginData>processResult())
                 .onErrorResumeNext(RxHandler.<LoginData>errorInterceptor())
-                .subscribe(new HttpObserver<LoginData>() {
+                .subscribe(new RxReponse<LoginData>() {
 
                     @Override
                     protected void onResult(LoginData result) {

@@ -34,12 +34,11 @@ public abstract class ServiceWrapper<T, P extends ServiceProxy<T>> {
      *
      * @param host 主机地址
      */
-    public void linkService(String host) {
+    public synchronized void linkService(String host) {
         if (null == mServiceProxy)
             mServiceProxy = onCreateServiceProxy();
         if (mHost == null || !mHost.equals(host)) {
-            mService = new ServiceCreator(mOkHttpClient)
-                    .create(mServiceProxy.getService(), host);
+            mService = ServiceCreator.create(mOkHttpClient, mServiceProxy.getService(), host);
             mHost = host;
         }
     }
@@ -53,6 +52,5 @@ public abstract class ServiceWrapper<T, P extends ServiceProxy<T>> {
         if (null == mServiceProxy) throw new RuntimeException("Unlink service");
         return mServiceProxy;
     }
-
 
 }

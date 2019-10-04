@@ -12,17 +12,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 class ServiceCreator {
 
-    private OkHttpClient mOkHttpClient;
 
-    ServiceCreator(OkHttpClient okHttpClient) {
-        this.mOkHttpClient = okHttpClient;
+    private ServiceCreator() {
     }
 
-    <T> T create(Class<T> service, String host) {
-        if (null == mOkHttpClient) throw new RuntimeException("OkHttpClient uninitialized!");
+    /**
+     * 创建访问代理实体
+     *
+     * @param okHttpClient
+     * @param service
+     * @param host
+     * @param <T>
+     * @return
+     */
+    static <T> T create(OkHttpClient okHttpClient, Class<T> service, String host) {
+        if (null == okHttpClient) throw new RuntimeException("OkHttpClient uninitialized!");
         Retrofit gankRetrofit = new Retrofit.Builder()
                 .baseUrl(host)
-                .client(mOkHttpClient)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
