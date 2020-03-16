@@ -3,7 +3,7 @@ package com.mkleo.project.model.http.rx;
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
-import com.mkleo.project.bean.http.base.Result;
+import com.mkleo.project.bean.http.base.Response;
 import com.mkleo.project.model.http.HttpPolicy;
 import com.mkleo.project.utils.MkLog;
 
@@ -35,11 +35,11 @@ public class RxHandler {
      * @param <T>
      * @return
      */
-    public static <T> ObservableTransformer<T, T> resultOnMainThread() {
+    public static <T> ObservableTransformer<T, T> rxScheduler() {
         return new ObservableTransformer<T, T>() {
             @Override
-            public ObservableSource<T> apply(Observable<T> resultObservable) {
-                return resultObservable.subscribeOn(Schedulers.io())
+            public ObservableSource<T> apply(Observable<T> observable) {
+                return observable.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
@@ -47,26 +47,26 @@ public class RxHandler {
 
 
     /**
-     * 处理结构
+     * 处理响应
      *
      * @param <T>
      * @return
      */
-    public static <T extends Result.Data> ObservableTransformer<Result<T>, T> processResult() {
+    public static <T extends Response.Data> ObservableTransformer<Response<T>, T> rxResponse() {
         //返回一个变换过的Observalbe
-        return new ObservableTransformer<Result<T>, T>() {
+        return new ObservableTransformer<Response<T>, T>() {
             @Override
-            public ObservableSource<T> apply(Observable<Result<T>> resultObservable) {
+            public ObservableSource<T> apply(Observable<Response<T>> responseObservable) {
                 //变换
-                return resultObservable.flatMap(new Function<Result<T>, ObservableSource<T>>() {
+                return responseObservable.flatMap(new Function<Response<T>, ObservableSource<T>>() {
                     @Override
-                    public ObservableSource<T> apply(Result<T> result) throws Exception {
-                        if (result.isStatus()) {
+                    public ObservableSource<T> apply(Response<T> response) throws Exception {
+                        if (response.getResult()) {
                             //说明访问成功
-                            return emiteterData(result.getData());
+                            return emiteterData(response.getData());
                         } else {
                             //说明访问失败
-                            throw new RxException(result.getErrcode(), result.getMessage());
+                            throw new RxException(response.getCode(), response.getMessage());
                         }
                     }
                 });
@@ -103,12 +103,12 @@ public class RxHandler {
 
 
     /**
-     * err拦截器
+     * 拦截器
      *
      * @param <T>
      * @return
      */
-    public static <T> Function<Throwable, Observable<T>> errorInterceptor() {
+    public static <T> Function<Throwable, Observable<T>> rxError() {
         return new Function<Throwable, Observable<T>>() {
             @Override
             public Observable<T> apply(Throwable throwable) {

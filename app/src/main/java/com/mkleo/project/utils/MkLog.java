@@ -16,7 +16,6 @@ public class MkLog {
 
     private static final String MAIN_TAG = "Mk.log";
 
-
     @IntDef({
             LogLv.V,
             LogLv.D,

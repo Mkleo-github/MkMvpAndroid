@@ -1,5 +1,7 @@
 package com.mkleo.project.model.eventbus;
 
+import android.support.annotation.Nullable;
+
 /**
  * des:
  * by: Mk.leo
@@ -35,7 +37,7 @@ public class Event<T> implements IEvent<T> {
     }
 
 
-    void setFilters(String... filters) {
+    void setFilters(@Nullable String... filters) {
         this.filters = filters;
     }
 

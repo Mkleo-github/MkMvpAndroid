@@ -8,11 +8,11 @@ import io.reactivex.disposables.Disposable;
  * by: Mk.leo
  * date: 2019/7/27
  */
-public abstract class RxReponse<T> implements Observer<T> {
+public abstract class RxResponse<T> implements Observer<T> {
 
     private Disposable mDisposable;
 
-    public RxReponse() {
+    public RxResponse() {
     }
 
 
@@ -23,7 +23,7 @@ public abstract class RxReponse<T> implements Observer<T> {
 
     @Override
     public void onNext(T t) {
-        onResult(t);
+        onResponse(t);
     }
 
     @Override
@@ -49,5 +49,5 @@ public abstract class RxReponse<T> implements Observer<T> {
 
     protected abstract void onError(int errCode, String errMessage);
 
-    protected abstract void onResult(T result);
+    protected abstract void onResponse(T t);
 }

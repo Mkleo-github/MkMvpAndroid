@@ -2,7 +2,7 @@ package com.mkleo.project.model.http.service;
 
 
 import com.mkleo.project.bean.http.LoginData;
-import com.mkleo.project.bean.http.base.Result;
+import com.mkleo.project.bean.http.base.Response;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -32,7 +32,7 @@ public class AppService extends ServiceWrapper<AppService.IAppService, AppServic
             super(from);
         }
 
-        public Observable<Result<LoginData>> login() {
+        public Observable<Response<LoginData>> login() {
             return mService.login();
         }
 
@@ -42,6 +42,6 @@ public class AppService extends ServiceWrapper<AppService.IAppService, AppServic
         /* 登录 */
         @FormUrlEncoded
         @POST("app/auth/login.exjson")
-        Observable<Result<LoginData>> login();
+        Observable<Response<LoginData>> login();
     }
 }

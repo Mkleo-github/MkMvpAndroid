@@ -2,9 +2,9 @@ package com.mkleo.project.presenters;
 
 import com.mkleo.project.base.BasePresenter;
 import com.mkleo.project.bean.http.LoginData;
-import com.mkleo.project.bean.http.base.Result;
+import com.mkleo.project.bean.http.base.Response;
 import com.mkleo.project.model.http.HttpFactory;
-import com.mkleo.project.model.http.rx.RxReponse;
+import com.mkleo.project.model.http.rx.RxResponse;
 import com.mkleo.project.model.http.rx.RxHandler;
 import com.mkleo.project.presenters.contracts.LoginContract;
 
@@ -21,13 +21,13 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
         HttpFactory.appService().request()
                 .login()
-                .compose(RxHandler.<Result<LoginData>>resultOnMainThread())
-                .compose(RxHandler.<LoginData>processResult())
-                .onErrorResumeNext(RxHandler.<LoginData>errorInterceptor())
-                .subscribe(new RxReponse<LoginData>() {
+                .compose(RxHandler.<Response<LoginData>>rxScheduler())
+                .compose(RxHandler.<LoginData>rxResponse())
+                .onErrorResumeNext(RxHandler.<LoginData>rxError())
+                .subscribe(new RxResponse<LoginData>() {
 
                     @Override
-                    protected void onResult(LoginData result) {
+                    protected void onResponse(LoginData loginData) {
 
                     }
 

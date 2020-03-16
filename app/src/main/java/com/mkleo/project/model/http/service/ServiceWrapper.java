@@ -7,18 +7,18 @@ import okhttp3.OkHttpClient;
  * by: Mk.leo
  * date: 2019/6/20
  */
-public abstract class ServiceWrapper<T, P extends ServiceProxy<T>> {
+abstract class ServiceWrapper<T, P extends ServiceProxy<T>> {
 
     /* OkHttp */
     private OkHttpClient mOkHttpClient;
     /* 访问服务的实体 */
-    protected T mService;
+    T mService;
     /* 访问服务代理 */
     private P mServiceProxy;
     /* 主机地址 */
     private String mHost;
 
-    public ServiceWrapper(OkHttpClient okHttpClient) {
+    ServiceWrapper(OkHttpClient okHttpClient) {
         this.mOkHttpClient = okHttpClient;
     }
 
