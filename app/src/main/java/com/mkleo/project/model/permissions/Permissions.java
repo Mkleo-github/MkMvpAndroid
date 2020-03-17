@@ -20,9 +20,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/27
+ * 权限管理
  */
 public class Permissions {
 

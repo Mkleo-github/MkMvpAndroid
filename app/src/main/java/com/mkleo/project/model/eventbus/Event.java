@@ -7,41 +7,29 @@ import android.support.annotation.Nullable;
  * by: Mk.leo
  * date: 2019/7/27
  */
-public class Event<T> implements IEvent<T> {
+public abstract class Event<T extends IEvent.IData> implements IEvent<T> {
 
-    /* 事件 */
-    private final String event;
-    /* 数据 */
-    private final T data;
+    private Class[] filters;
+    private T data;
 
-    private String[] filters;
-
-    public Event(String event) {
-        this(event, null);
-    }
-
-    public Event(String event, T data) {
-        this.event = event;
+    public final void setData(T data) {
         this.data = data;
     }
 
-
-    @Override
-    public T getData() {
+    public final T getData() {
         return data;
     }
 
-    @Override
-    public String getEvent() {
-        return event;
-    }
-
-
-    void setFilters(@Nullable String... filters) {
+    /**
+     * 添加过滤
+     *
+     * @param filters
+     */
+    public final void addFilters(@Nullable Class... filters) {
         this.filters = filters;
     }
 
-    String[] getFilters() {
+    final Class[] getFilters() {
         return filters;
     }
 }

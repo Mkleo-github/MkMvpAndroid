@@ -9,6 +9,9 @@ import com.mkleo.project.R;
 import com.mkleo.project.app.Constants;
 import com.mkleo.project.base.IPresenter;
 import com.mkleo.project.base.MvpActivity;
+import com.mkleo.project.bean.event.LoginEvent;
+import com.mkleo.project.model.eventbus.Event;
+import com.mkleo.project.model.eventbus.Eventer;
 import com.mkleo.project.model.eventbus.IEventReceiver;
 import com.mkleo.project.model.permissions.AppSettingsDialog;
 import com.mkleo.project.model.permissions.PermissionCallback;
@@ -24,7 +27,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 
-public class MainActivity extends MvpActivity<LoginPresenter> {
+public class MainActivity extends MvpActivity<LoginPresenter> implements IEventReceiver<Event> {
 
 
     private Permissions mPermissions;
@@ -41,7 +44,7 @@ public class MainActivity extends MvpActivity<LoginPresenter> {
 
     @Override
     protected void onActivityReady() {
-
+        Eventer.getDefault().register(getClass(), this);
         mPermissions = new Permissions(this, Constants.REQUEST_PERMISSIONS)
                 .setPermissionCallback(new PermissionCallback() {
                     @Override
@@ -68,6 +71,11 @@ public class MainActivity extends MvpActivity<LoginPresenter> {
         mPermissions.requestPermisssion();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Eventer.getDefault().unregister(getClass(), this);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -88,6 +96,7 @@ public class MainActivity extends MvpActivity<LoginPresenter> {
 
     public void login(View view) {
         //登录
+        Eventer.getDefault().post(new LoginEvent());
         mPresenter.login("", "", "");
     }
 
@@ -96,4 +105,11 @@ public class MainActivity extends MvpActivity<LoginPresenter> {
     }
 
 
+    @Override
+    public void onEvent(Event event) {
+        if (event instanceof LoginEvent) {
+            //登录事件
+            printLog("登录事件");
+        }
+    }
 }
