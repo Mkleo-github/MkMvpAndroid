@@ -12,22 +12,21 @@ public abstract class RxResponse<T> implements Observer<T> {
 
     private Disposable mDisposable;
 
-    public RxResponse() {
+    protected RxResponse() {
     }
 
-
     @Override
-    public void onSubscribe(Disposable d) {
+    public final void onSubscribe(Disposable d) {
         mDisposable = d;
     }
 
     @Override
-    public void onNext(T t) {
+    public final void onNext(T t) {
         onResponse(t);
     }
 
     @Override
-    public void onError(Throwable e) {
+    public final void onError(Throwable e) {
         if (e instanceof RxException) {
             RxException rxException = (RxException) e;
             onError(rxException.getCode(), rxException.getErrMessage());
@@ -41,7 +40,7 @@ public abstract class RxResponse<T> implements Observer<T> {
     }
 
     @Override
-    public void onComplete() {
+    public final void onComplete() {
         //会在执行结束后回收防止内存泄漏
         if (null != mDisposable && !mDisposable.isDisposed())
             mDisposable.dispose();
