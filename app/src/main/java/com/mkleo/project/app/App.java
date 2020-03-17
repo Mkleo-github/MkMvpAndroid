@@ -138,6 +138,7 @@ public class App extends Application {
             public void onCrash(String crashMsg) {
                 //发生异常
                 MkLog.log(MkLog.LogLv.E, crashMsg);
+                exit();
             }
         });
     }

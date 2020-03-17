@@ -6,6 +6,7 @@ import com.mkleo.project.bean.http.base.Response;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
@@ -32,8 +33,8 @@ public class AppService extends ServiceWrapper<AppService.IAppService, AppServic
             super(from);
         }
 
-        public Observable<Response<LoginData>> login() {
-            return mService.login();
+        public Observable<Response<LoginData>> login(String userName, String password) {
+            return mService.login(userName, password);
         }
 
     }
@@ -42,6 +43,6 @@ public class AppService extends ServiceWrapper<AppService.IAppService, AppServic
         /* 登录 */
         @FormUrlEncoded
         @POST("app/auth/login.exjson")
-        Observable<Response<LoginData>> login();
+        Observable<Response<LoginData>> login(@Field("userName") String userName, @Field("password") String password);
     }
 }

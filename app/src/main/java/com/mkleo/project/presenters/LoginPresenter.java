@@ -20,7 +20,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     public void login(String userName, String passWord, String imei) {
 
         HttpFactory.appService().request()
-                .login()
+                .login(userName, passWord)
                 .compose(RxHandler.<Response<LoginData>>rxScheduler())
                 .compose(RxHandler.<LoginData>rxResponse())
                 .onErrorResumeNext(RxHandler.<LoginData>rxError())

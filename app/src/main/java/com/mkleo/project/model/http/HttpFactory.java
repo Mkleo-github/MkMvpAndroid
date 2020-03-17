@@ -40,12 +40,9 @@ public class HttpFactory {
      */
     public static void init(Context context, String cachePath) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        if (BuildConfig.DEBUG) {
-            // https://drakeet.me/retrofit-2-0-okhttp-3-0-config
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            builder.addInterceptor(loggingInterceptor);
-        }
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(loggingInterceptor);
 
         File cacheFile = new File(cachePath);
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
@@ -73,7 +70,7 @@ public class HttpFactory {
 
 
     public static AppService appService() {
-        if(!isInit) throw new RuntimeException("请先初始化HttpFactory");
+        if (!isInit) throw new RuntimeException("请先初始化HttpFactory");
         return sAppService;
     }
 
