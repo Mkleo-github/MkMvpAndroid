@@ -15,12 +15,12 @@ import com.mkleo.project.model.eventbus.IEventReceiver;
 import com.mkleo.project.model.permissions.AppSettingsDialog;
 import com.mkleo.project.model.permissions.PermissionCallback;
 import com.mkleo.project.model.permissions.Permissions;
-import com.mkleo.project.presenters.LoginPresenter;
+import com.mkleo.project.presenters.SamplePresenter;
 
 /**
  * 使用样例
  */
-public class SampleActivity extends MvpActivity<LoginPresenter> implements IEventReceiver {
+public class SampleActivity extends MvpActivity<SamplePresenter> implements IEventReceiver {
 
 
     private Permissions mPermissions;
@@ -31,8 +31,8 @@ public class SampleActivity extends MvpActivity<LoginPresenter> implements IEven
     }
 
     @Override
-    protected LoginPresenter setPresenter() {
-        return new LoginPresenter();
+    protected SamplePresenter setPresenter() {
+        return new SamplePresenter();
     }
 
     @Override

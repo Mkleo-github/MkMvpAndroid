@@ -6,9 +6,9 @@ import com.mkleo.project.bean.http.base.Response;
 import com.mkleo.project.model.http.HttpFactory;
 import com.mkleo.project.model.http.rx.RxResponse;
 import com.mkleo.project.model.http.rx.RxHandler;
-import com.mkleo.project.presenters.contracts.LoginContract;
+import com.mkleo.project.presenters.contracts.SampleContract;
 
-public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
+public class SamplePresenter extends BasePresenter<SampleContract.View> implements SampleContract.Presenter {
 
 
     @Override

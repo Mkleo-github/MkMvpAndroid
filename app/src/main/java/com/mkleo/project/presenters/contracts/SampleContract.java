@@ -4,7 +4,7 @@ package com.mkleo.project.presenters.contracts;
 import com.mkleo.project.base.IPresenter;
 import com.mkleo.project.base.IView;
 
-public interface LoginContract {
+public interface SampleContract {
 
     interface View extends IView {
 
