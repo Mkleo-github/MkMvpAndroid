@@ -62,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         mUnbinder = ButterKnife.bind(this);
         mActivity = this;
         //将Activity加入管理
-        App.getInstance().addActivity(this);
+        App.getSingleton().addActivity(this);
     }
 
     protected abstract void onActivityReady();
@@ -72,7 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         super.onDestroy();
         if (null != mUnbinder)
             mUnbinder.unbind();
-        App.getInstance().removeActivity(this);
+        App.getSingleton().removeActivity(this);
     }
 
     /**

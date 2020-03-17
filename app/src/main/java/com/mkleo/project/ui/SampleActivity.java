@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.mkleo.project.R;
 import com.mkleo.project.app.Constants;
-import com.mkleo.project.base.IPresenter;
 import com.mkleo.project.base.MvpActivity;
 import com.mkleo.project.bean.event.LoginEvent;
 import com.mkleo.project.model.eventbus.Event;
@@ -17,24 +16,18 @@ import com.mkleo.project.model.permissions.AppSettingsDialog;
 import com.mkleo.project.model.permissions.PermissionCallback;
 import com.mkleo.project.model.permissions.Permissions;
 import com.mkleo.project.presenters.LoginPresenter;
-import com.mkleo.project.utils.MkLog;
 
-import org.reactivestreams.Subscriber;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.observers.DisposableObserver;
-
-public class MainActivity extends MvpActivity<LoginPresenter> implements IEventReceiver<Event> {
+/**
+ * 使用样例
+ */
+public class SampleActivity extends MvpActivity<LoginPresenter> implements IEventReceiver<Event> {
 
 
     private Permissions mPermissions;
 
     @Override
     protected int setLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_sample;
     }
 
     @Override

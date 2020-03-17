@@ -32,7 +32,7 @@ public class Constants {
 
         public static final String DATA = GEN + File.separator + "data";
 
-        public static final String NET_CACHE = DATA + "/NetCache";
+        public static final String HTTP_CACHE = DATA + "/HttpCache";
     }
 
     public static final String MAIN_HOST = "https://www.baidu.com/";

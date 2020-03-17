@@ -29,6 +29,7 @@ dependencies {
     //解除方法数目65535限制
     implementation 'com.android.support:multidex:1.0.3'
     //view插件
+    //noinspection AnnotationProcessorOnCompilePath
     implementation 'com.jakewharton:butterknife:8.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
     //http
