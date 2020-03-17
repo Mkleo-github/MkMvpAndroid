@@ -4,14 +4,12 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * des: Event事件会被自动通过注解注册
- * by: Mk.leo
- * date: 2019/7/27
+ * 事件接收器,都通过该接收器来响应事件
  */
-abstract class EventReceiver<T extends Event> implements IEventReceiver<T> {
+abstract class EventReceiver implements IEventReceiver {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public final void OnSubscribe(T event) {
+    public final void OnSubscribe(IEvent event) {
         if (null != event) {
             this.onEvent(event);
         }

@@ -14,9 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * des:无presenter的activity
- * by: Mk.leo
- * date: 2019/7/26
+ * 无presenter的activity
  */
 public abstract class BaseActivity extends AppCompatActivity implements IView {
 

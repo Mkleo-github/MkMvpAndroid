@@ -9,8 +9,8 @@ import com.mkleo.project.R;
 import com.mkleo.project.app.Constants;
 import com.mkleo.project.base.MvpActivity;
 import com.mkleo.project.bean.event.LoginEvent;
-import com.mkleo.project.model.eventbus.Event;
 import com.mkleo.project.model.eventbus.Eventer;
+import com.mkleo.project.model.eventbus.IEvent;
 import com.mkleo.project.model.eventbus.IEventReceiver;
 import com.mkleo.project.model.permissions.AppSettingsDialog;
 import com.mkleo.project.model.permissions.PermissionCallback;
@@ -20,7 +20,7 @@ import com.mkleo.project.presenters.LoginPresenter;
 /**
  * 使用样例
  */
-public class SampleActivity extends MvpActivity<LoginPresenter> implements IEventReceiver<Event> {
+public class SampleActivity extends MvpActivity<LoginPresenter> implements IEventReceiver {
 
 
     private Permissions mPermissions;
@@ -99,7 +99,7 @@ public class SampleActivity extends MvpActivity<LoginPresenter> implements IEven
 
 
     @Override
-    public void onEvent(Event event) {
+    public void onEvent(IEvent event) {
         if (event instanceof LoginEvent) {
             //登录事件
             printLog("登录事件");

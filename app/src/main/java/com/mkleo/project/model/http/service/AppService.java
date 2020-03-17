@@ -11,9 +11,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 /**
- * des:服务器访问实体
- * by: Mk.leo
- * date: 2019/7/26
+ * 服务访问的实体
  */
 public class AppService extends ServiceWrapper<AppService.IAppService, AppService.AppServiceProxy> {
 

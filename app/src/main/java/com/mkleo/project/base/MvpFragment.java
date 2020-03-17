@@ -1,9 +1,9 @@
 package com.mkleo.project.base;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/27
+ * MVP Fragment
+ *
+ * @param <T> Presenter
  */
 public abstract class MvpFragment<T extends BasePresenter> extends BaseFragment {
 

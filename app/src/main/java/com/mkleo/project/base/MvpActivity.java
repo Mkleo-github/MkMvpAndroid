@@ -1,9 +1,9 @@
 package com.mkleo.project.base;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/26
+ * MVP Activity
+ *
+ * @param <T> Presenter
  */
 public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity {
 

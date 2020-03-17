@@ -1,9 +1,7 @@
 package com.mkleo.project.base;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/26
+ * View抽象
  */
 public interface IView {
 

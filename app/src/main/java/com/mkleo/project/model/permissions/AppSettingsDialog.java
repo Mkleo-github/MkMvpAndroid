@@ -14,9 +14,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 
 /**
- * des:复制easypermiisions 跳转权限设置的dialog
- * by: Mk.leo
- * date: 2019/7/29
+ *  copy easypermiisions 跳转权限设置的dialog
  */
 public class AppSettingsDialog {
 

@@ -12,9 +12,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/6/20
+ * 缓存拦截器
  */
 public class CacheInterceptor implements Interceptor {
 

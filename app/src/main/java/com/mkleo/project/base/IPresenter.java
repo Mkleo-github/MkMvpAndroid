@@ -1,9 +1,9 @@
 package com.mkleo.project.base;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/26
+ * Presenter抽象
+ *
+ * @param <V> View抽象
  */
 public interface IPresenter<V extends IView> {
 

@@ -30,27 +30,27 @@ public class Eventer {
     }
 
     //线程安全
-    private final Hashtable<Class, Vector<IEventReceiver<Event>>> mReceivers = new Hashtable<>();
+    private final Hashtable<Class, Vector<IEventReceiver>> mReceivers = new Hashtable<>();
     //事件接收器
-    private final EventReceiver<Event> mEventReceiver = new EventReceiver<Event>() {
+    private final EventReceiver mEventReceiver = new EventReceiver() {
         @Override
-        public void onEvent(Event event) {
+        public void onEvent(IEvent event) {
             //获取过滤字段
             final Class[] filters = event.getFilters();
             if (null == filters) {
                 //发送给所有
-                for (Map.Entry<Class, Vector<IEventReceiver<Event>>> entry : mReceivers.entrySet()) {
-                    for (IEventReceiver<Event> eventReceiver : entry.getValue()) {
+                for (Map.Entry<Class, Vector<IEventReceiver>> entry : mReceivers.entrySet()) {
+                    for (IEventReceiver eventReceiver : entry.getValue()) {
                         eventReceiver.onEvent(event);
                     }
                 }
             } else {
                 for (Class filter : filters) {
-                    Vector<IEventReceiver<Event>> listeners = mReceivers.get(filter);
+                    Vector<IEventReceiver> eventReceivers = mReceivers.get(filter);
                     //分发消息
-                    if (null != listeners) {
-                        for (IEventReceiver<Event> OnEvent : listeners) {
-                            OnEvent.onEvent(event);
+                    if (null != eventReceivers) {
+                        for (IEventReceiver eventReceiver : eventReceivers) {
+                            eventReceiver.onEvent(event);
                         }
                     }
                 }
@@ -63,20 +63,20 @@ public class Eventer {
      * 注册
      *
      * @param filter
-     * @param listener
+     * @param eventReceiver
      */
-    public synchronized void register(Class filter, IEventReceiver<Event> listener) {
+    public synchronized void register(Class filter, IEventReceiver eventReceiver) {
         if (null != filter) {
-            Vector<IEventReceiver<Event>> listeners = mReceivers.get(filter);
-            if (null == listeners) {
+            Vector<IEventReceiver> eventReceivers = mReceivers.get(filter);
+            if (null == eventReceivers) {
                 //说明该事件监听没有订阅过
-                listeners = new Vector<>();
-                listeners.add(listener);
-                mReceivers.put(filter, listeners);
+                eventReceivers = new Vector<>();
+                eventReceivers.add(eventReceiver);
+                mReceivers.put(filter, eventReceivers);
             } else {
                 //每个监听只能订阅一次
-                if (!listeners.contains(listener)) {
-                    listeners.add(listener);
+                if (!eventReceivers.contains(eventReceiver)) {
+                    eventReceivers.add(eventReceiver);
                 }
             }
         }
@@ -86,14 +86,14 @@ public class Eventer {
      * 解除订阅
      *
      * @param filter
-     * @param listener
+     * @param eventReceiver
      */
-    public synchronized void unregister(Class filter, IEventReceiver<Event> listener) {
+    public synchronized void unregister(Class filter, IEventReceiver eventReceiver) {
         if (null != filter) {
-            Vector<IEventReceiver<Event>> listeners = mReceivers.get(filter);
-            if (null != listeners) {
-                listeners.remove(listener);
-                if (listeners.size() == 0) {
+            Vector<IEventReceiver> eventReceivers = mReceivers.get(filter);
+            if (null != eventReceivers) {
+                eventReceivers.remove(eventReceiver);
+                if (eventReceivers.size() == 0) {
                     mReceivers.remove(filter);
                 }
             }
@@ -103,12 +103,12 @@ public class Eventer {
     /**
      * 发送event
      *
-     * @param targets 目标位置
+     * @param filters 目标位置
      * @param event
      */
-    public <T extends Event> void post(T event, @Nullable Class... targets) {
+    public <T extends Event> void post(T event, @Nullable Class... filters) {
         if (null != event) {
-            event.addFilters(targets);
+            event.addFilters(filters);
             EventBus.getDefault().post(event);
         }
     }

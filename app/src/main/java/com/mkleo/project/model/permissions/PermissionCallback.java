@@ -1,9 +1,7 @@
 package com.mkleo.project.model.permissions;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/29
+ * 权限获取回调
  */
 public interface PermissionCallback {
 

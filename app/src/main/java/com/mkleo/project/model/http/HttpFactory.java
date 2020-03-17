@@ -15,9 +15,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/6/20
+ * HTTP
  */
 public class HttpFactory {
 

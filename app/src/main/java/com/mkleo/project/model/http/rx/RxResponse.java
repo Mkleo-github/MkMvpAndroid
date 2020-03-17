@@ -1,15 +1,18 @@
 package com.mkleo.project.model.http.rx;
 
+import com.mkleo.project.bean.http.base.Response;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/27
+ * RX http响应
+ *
+ * @param <T> 返回响应数据
  */
-public abstract class RxResponse<T> implements Observer<T> {
+public abstract class RxResponse<T extends Response.Data> implements Observer<T> {
 
+    //可以终止的
     private Disposable mDisposable;
 
     protected RxResponse() {
@@ -29,7 +32,7 @@ public abstract class RxResponse<T> implements Observer<T> {
     public final void onError(Throwable e) {
         if (e instanceof RxException) {
             RxException rxException = (RxException) e;
-            onError(rxException.getCode(), rxException.getErrMessage());
+            onError(rxException.getCode(), rxException.getMessage());
         } else {
             e.printStackTrace();
             onError(e.hashCode(), "" + e.getMessage());

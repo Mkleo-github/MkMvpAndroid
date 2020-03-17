@@ -7,11 +7,6 @@ import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * des:
- * by: Mk.leo
- * date: 2019/7/27
- */
 public class MkLog {
 
     private static final String MAIN_TAG = "Mk.log";

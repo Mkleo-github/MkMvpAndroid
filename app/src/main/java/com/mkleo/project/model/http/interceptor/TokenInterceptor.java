@@ -7,9 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * des:Token
- * by: Mk.leo
- * date: 2019/6/20
+ * Token拦截器
  */
 public class TokenInterceptor implements Interceptor {
 

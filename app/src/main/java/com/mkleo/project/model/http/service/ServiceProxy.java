@@ -1,9 +1,9 @@
 package com.mkleo.project.model.http.service;
 
 /**
- * des: 服务代理
- * by: Mk.leo
- * date: 2019/8/8
+ * 服务访问代理
+ *
+ * @param <T>
  */
 class ServiceProxy<T> {
 

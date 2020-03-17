@@ -6,9 +6,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/6/20
+ * 服务访问构建器
  */
 class ServiceCreator {
 

@@ -22,9 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.HttpException;
 
 /**
- * des:rx统一处理类
- * by: Mk.leo
- * date: 2019/7/27
+ * rx统一处理类
  */
 public class RxHandler {
 

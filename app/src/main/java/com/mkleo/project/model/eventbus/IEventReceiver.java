@@ -1,10 +1,8 @@
 package com.mkleo.project.model.eventbus;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/27
+ * 接收器接口
  */
-public interface IEventReceiver<T extends Event> {
-    void onEvent(T event);
+public interface IEventReceiver {
+    void onEvent(IEvent event);
 }

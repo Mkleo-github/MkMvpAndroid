@@ -1,37 +1,31 @@
 package com.mkleo.project.model.http.rx;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/27
+ * 异常
  */
 public class RxException extends Exception {
 
-    private int code;
-    private String errMessage;
+    private final int code;
+    private final String message;
 
-    public RxException(String errMessage) {
-        super(errMessage);
+    public RxException(String message) {
+        this(-1, message);
     }
 
-    public RxException(int code, String errMessage) {
-        super(errMessage);
+    public RxException(int code, String message) {
+        super(message);
         this.code = code;
-        this.errMessage = errMessage;
+        this.message = message;
     }
 
     public RxException(Throwable throwable, int code) {
         super(throwable);
+        this.message = throwable.getMessage();
         this.code = code;
     }
 
-    public RxException setErrMessage(String errMessage) {
-        this.errMessage = errMessage;
-        return this;
-    }
-
-    public String getErrMessage() {
-        return errMessage;
+    public String getMessage() {
+        return message;
     }
 
     public int getCode() {

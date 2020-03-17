@@ -16,9 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/26
+ * App
  */
 public class App extends Application {
 

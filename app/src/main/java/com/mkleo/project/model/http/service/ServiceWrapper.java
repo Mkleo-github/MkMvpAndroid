@@ -3,9 +3,10 @@ package com.mkleo.project.model.http.service;
 import okhttp3.OkHttpClient;
 
 /**
- * des: P是服务代理
- * by: Mk.leo
- * date: 2019/6/20
+ * 服务访问封装
+ *
+ * @param <T> 服务实体
+ * @param <P> 服务代理
  */
 abstract class ServiceWrapper<T, P extends ServiceProxy<T>> {
 

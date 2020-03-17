@@ -8,11 +8,6 @@ import com.mkleo.project.model.http.rx.RxResponse;
 import com.mkleo.project.model.http.rx.RxHandler;
 import com.mkleo.project.presenters.contracts.LoginContract;
 
-/**
- * des:
- * by: Mk.leo
- * date: 2019/7/26
- */
 public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
 
 

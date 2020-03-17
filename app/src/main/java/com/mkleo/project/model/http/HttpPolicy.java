@@ -1,9 +1,7 @@
 package com.mkleo.project.model.http;
 
 /**
- * des:协议字段
- * by: Mk.leo
- * date: 2019/7/26
+ * 协议
  */
 public class HttpPolicy {
 
@@ -19,7 +17,7 @@ public class HttpPolicy {
     }
 
 
-    public static class HttpCode{
+    public static class HttpCode {
 
         private static final int UNAUTHORIZED = 401;
         private static final int FORBIDDEN = 403;

@@ -6,9 +6,7 @@ import android.os.Environment;
 import java.io.File;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/26
+ * 常量
  */
 public class Constants {
 

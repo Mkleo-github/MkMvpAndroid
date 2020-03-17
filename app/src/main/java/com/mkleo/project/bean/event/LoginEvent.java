@@ -4,6 +4,9 @@ package com.mkleo.project.bean.event;
 import com.mkleo.project.model.eventbus.Event;
 import com.mkleo.project.model.eventbus.IEvent;
 
+/**
+ * 登录事件样例
+ */
 public class LoginEvent extends Event<LoginEvent.Data> {
 
 

@@ -18,9 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * des:无presenter的fragment
- * by: Mk.leo
- * date: 2019/7/27
+ * 无presenter的fragment
  */
 public abstract class BaseFragment extends Fragment implements IView {
 

@@ -6,9 +6,9 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * des:
- * by: Mk.leo
- * date: 2019/7/26
+ * presenter基类
+ *
+ * @param <V> View的抽象
  */
 public class BasePresenter<V extends IView> implements IPresenter<V> {
 

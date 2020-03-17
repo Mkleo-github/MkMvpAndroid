@@ -5,11 +5,6 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-/**
- * des: SharedPreferences工具
- * by: Mk.leo
- * date: 2019/7/26
- */
 public class SPUtil {
 
     private static final String TAG = SPUtil.class.getSimpleName();
