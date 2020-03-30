@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,12 +30,11 @@ public abstract class BaseDialog extends Dialog {
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //在setContentView之后
         getWindow().setBackgroundDrawable(new ColorDrawable(0x00000000));
-        mView = onCreateView();
+        mView = LayoutInflater.from(getContext()).inflate(getContentResource(), null, false);
         setContentView(mView);
         if (isFullScreen) {
             getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         }
-
         if (isOverlay) {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) {
                 getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);
@@ -70,7 +70,17 @@ public abstract class BaseDialog extends Dialog {
         isFullScreen = fullScreen;
     }
 
-    protected abstract View onCreateView();
+    /**
+     * 获取内容的资源id
+     *
+     * @return
+     */
+    protected abstract int getContentResource();
 
+    /**
+     * dialog创建
+     *
+     * @param view
+     */
     protected abstract void onDialogCreate(View view);
 }
