@@ -31,8 +31,8 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
     }
 
     @Override
-    protected SamplePresenter setPresenter() {
-        return new SamplePresenter();
+    protected Class<SamplePresenter> injectPresenter() {
+        return SamplePresenter.class;
     }
 
     @Override

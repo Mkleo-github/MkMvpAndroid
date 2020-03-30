@@ -119,7 +119,7 @@ public class Eventer {
      * @param event
      */
     public <T extends Event> void post(T event) {
-        post(event, null);
+        post(event, (Class[]) null);
     }
 
 

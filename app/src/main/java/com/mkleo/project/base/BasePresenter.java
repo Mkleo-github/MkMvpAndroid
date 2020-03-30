@@ -10,10 +10,11 @@ import io.reactivex.disposables.Disposable;
  *
  * @param <V> View的抽象
  */
-public class BasePresenter<V extends IView> implements IPresenter<V> {
+public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
 
-    /* 弱引用,防止内存泄漏 */
+    //弱引用,防止内存泄漏
     private WeakReference<V> mViewReference;
+    //RXJAVA内存回收
     private CompositeDisposable mCompositeDisposable;
 
     @Override

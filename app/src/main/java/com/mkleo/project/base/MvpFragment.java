@@ -10,16 +10,14 @@ public abstract class MvpFragment<T extends BasePresenter> extends BaseFragment 
     /* 业务处理类 */
     protected T mPresenter;
 
-    protected abstract T setPresenter();
-
+    protected abstract Class<T> injectPresenter();
 
     @Override
     protected void onFragmentCreate() {
         super.onFragmentCreate();
         //初始化Presenter
-        mPresenter = setPresenter();
-        if (null != mPresenter)
-            mPresenter.attachView(this);
+        mPresenter = getPresenter();
+        mPresenter.attachView(this);
     }
 
     @Override
@@ -28,5 +26,19 @@ public abstract class MvpFragment<T extends BasePresenter> extends BaseFragment 
         if (mPresenter != null)
             mPresenter.detachView();
         mPresenter = null;
+    }
+
+    /**
+     * 实例化Prersenter
+     *
+     * @return
+     */
+    private T getPresenter() {
+        Class<T> clazz = injectPresenter();
+        try {
+            return clazz.newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("[无法实例化" + clazz.getSimpleName() + "]:" + e.toString());
+        }
     }
 }

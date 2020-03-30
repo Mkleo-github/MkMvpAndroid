@@ -10,7 +10,6 @@ import com.mkleo.project.presenters.contracts.SampleContract;
 
 public class SamplePresenter extends BasePresenter<SampleContract.View> implements SampleContract.Presenter {
 
-
     @Override
     public void login(String userName, String passWord, String imei) {
 
