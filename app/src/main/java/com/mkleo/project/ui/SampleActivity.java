@@ -26,13 +26,13 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
     private Permissions mPermissions;
 
     @Override
-    protected int setLayout() {
-        return R.layout.activity_sample;
+    protected SamplePresenter onBindPresenter() {
+        return new SamplePresenter();
     }
 
     @Override
-    protected Class<SamplePresenter> injectPresenter() {
-        return SamplePresenter.class;
+    protected int getLayoutResId() {
+        return R.layout.activity_sample;
     }
 
     @Override
@@ -65,8 +65,7 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onActivityRelease() {
         Eventer.getDefault().unregister(getClass(), this);
     }
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.mkleo.project.app.App;
 import com.mkleo.project.utils.MkLog;
 
 import butterknife.ButterKnife;
@@ -23,27 +24,24 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment implements IView {
 
     protected Activity mActivity;
-
     protected Context mContext;
-    /* butterknife */
     private Unbinder mUnbinder;
-
     protected View mView;
-    /* 加载提示框 */
     private ProgressDialog mProgressDialog;
 
     @Override
-    public void onAttach(Context context) {
+    public final void onAttach(Context context) {
         if (context instanceof Activity)
             this.mActivity = (Activity) context;
         this.mContext = context;
         super.onAttach(context);
     }
 
+
     @Nullable
     @Override
     public final View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(setLayout(), null);
+        mView = inflater.inflate(getLayoutResId(), null);
         return mView;
     }
 
@@ -55,35 +53,11 @@ public abstract class BaseFragment extends Fragment implements IView {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (null != mUnbinder)
-            mUnbinder.unbind();
-    }
-
-    @Override
-    public void onDestroy() {
+    public final void onDestroy() {
         super.onDestroy();
+        onFragmentRelease();
+        onFragmentDestroy();
     }
-
-    /**
-     * 设置一个布局
-     *
-     * @return
-     */
-    protected abstract int setLayout();
-
-    /**
-     * fragment创建
-     */
-    protected void onFragmentCreate(){
-        mUnbinder = ButterKnife.bind(this, mView);
-    }
-
-    /**
-     * fragment已经准备完毕
-     */
-    protected abstract void onFragmentReady();
 
     /**
      * 显示一个toast
@@ -118,7 +92,7 @@ public abstract class BaseFragment extends Fragment implements IView {
     }
 
     /**
-     * 取消加载提示
+     * 隐藏
      */
     @Override
     public void dismissProgress() {
@@ -127,6 +101,43 @@ public abstract class BaseFragment extends Fragment implements IView {
         }
     }
 
+    /**
+     * fragment创建
+     */
+    protected void onFragmentCreate() {
+        mUnbinder = ButterKnife.bind(this, mView);
+    }
+
+    /**
+     * 销毁
+     */
+    protected void onFragmentDestroy() {
+        if (null != mUnbinder)
+            mUnbinder.unbind();
+    }
+
+    /**
+     * 设置一个布局
+     *
+     * @return
+     */
+    protected abstract int getLayoutResId();
+
+    /**
+     * fragment已经准备完毕
+     */
+    protected abstract void onFragmentReady();
+
+    /**
+     * 释放
+     */
+    protected abstract void onFragmentRelease();
+
+    /**
+     * 输出日志
+     *
+     * @param log
+     */
     protected void printLog(String log) {
         MkLog.print(getClass().getSimpleName(), log);
     }

@@ -11,38 +11,26 @@ public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity 
     protected T mPresenter;
 
     /**
-     * 注入
+     * 绑定Presenter
      *
      * @return
      */
-    protected abstract Class<T> injectPresenter();
+    protected abstract T onBindPresenter();
 
     @Override
     protected void onActivityCreate() {
         super.onActivityCreate();
         //初始化Presenter
-        mPresenter = getPresenter();
+        mPresenter = onBindPresenter();
         mPresenter.attachView(this);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mPresenter != null)
+    protected void onActivityDestroy() {
+        if (mPresenter != null) {
             mPresenter.detachView();
-    }
-
-    /**
-     * 实例化Prersenter
-     *
-     * @return
-     */
-    private T getPresenter() {
-        Class<T> clazz = injectPresenter();
-        try {
-            return clazz.newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException("[无法实例化" + clazz.getSimpleName() + "]:" + e.toString());
+            mPresenter = null;
         }
+        super.onActivityDestroy();
     }
 }

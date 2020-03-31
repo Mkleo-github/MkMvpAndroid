@@ -28,7 +28,6 @@ public abstract class BaseDialog extends Dialog {
         super.onCreate(savedInstanceState);
         //在setContentView之前
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        //在setContentView之后
         getWindow().setBackgroundDrawable(new ColorDrawable(0x00000000));
         mView = LayoutInflater.from(getContext()).inflate(getContentResource(), null, false);
         setContentView(mView);
@@ -45,11 +44,6 @@ public abstract class BaseDialog extends Dialog {
             }
         }
         onDialogCreate(mView);
-    }
-
-
-    protected View getContentView() {
-        return mView;
     }
 
     /**

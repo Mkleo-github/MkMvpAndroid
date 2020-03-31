@@ -24,54 +24,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
     /* 加载提示框 */
     private ProgressDialog mProgressDialog;
 
-    /**
-     * 无法被复写
-     *
-     * @param savedInstanceState
-     */
-    @Override
-    protected final void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(setLayout());
-        onActivityCreate();
-        onActivityReady();
-    }
-
-
-    /**
-     * 设置layout的res
-     *
-     * @return
-     */
-    protected abstract int setLayout();
-
-
-    /**
-     * activity创建
-     */
-    protected void onActivityCreate() {
-        //4.4以上设置透明状态栏
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-//        }
-
-        //绑定bufferKnife
-        mUnbinder = ButterKnife.bind(this);
-        mActivity = this;
-        //将Activity加入管理
-        App.getSingleton().addActivity(this);
-    }
-
-    protected abstract void onActivityReady();
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (null != mUnbinder)
-            mUnbinder.unbind();
-        App.getSingleton().removeActivity(this);
-    }
 
     /**
      * 显示一个toast
@@ -114,7 +66,70 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         }
     }
 
+    /**
+     * 无法被复写
+     *
+     * @param savedInstanceState
+     */
+    @Override
+    protected final void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutResId());
+        onActivityCreate();
+        onActivityReady();
+    }
 
+
+    @Override
+    protected final void onDestroy() {
+        super.onDestroy();
+        onActivityRelease();
+        onActivityDestroy();
+    }
+
+    /**
+     * activity创建
+     */
+    protected void onActivityCreate() {
+        //将Activity加入管理
+        App.getSingleton().addActivity(this);
+        //绑定bufferKnife
+        mUnbinder = ButterKnife.bind(this);
+        mActivity = this;
+    }
+
+    /**
+     * Activity销毁
+     */
+    protected void onActivityDestroy() {
+        if (null != mUnbinder) mUnbinder.unbind();
+        App.getSingleton().removeActivity(this);
+    }
+
+
+    /**
+     * 设置layout的res
+     *
+     * @return
+     */
+    protected abstract int getLayoutResId();
+
+    /**
+     * Activity准备完毕
+     */
+    protected abstract void onActivityReady();
+
+    /**
+     * Activity正在回收
+     */
+    protected abstract void onActivityRelease();
+
+
+    /**
+     * 打印日志
+     *
+     * @param log
+     */
     protected void printLog(String log) {
         MkLog.print(getClass().getSimpleName(), log);
     }
