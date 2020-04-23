@@ -12,8 +12,8 @@ import com.mkleo.project.model.http.HttpFactory;
 import com.mkleo.project.utils.CrashHandler;
 import com.mkleo.project.utils.MkLog;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * App
@@ -25,7 +25,7 @@ public class App extends Application {
     //屏幕高度
     private int mScreenHeight = -1;
     //Activity管理器
-    private final Set<Activity> mActivityManager = new HashSet<>();
+    private final List<Activity> mActivityManager = new ArrayList<>();
     //是否正在退出应用
     private boolean isExiting = false;
     //APP实例
@@ -100,14 +100,28 @@ public class App extends Application {
     }
 
     /**
+     * 获取最后显示activity实例
+     *
+     * @return
+     */
+    public Activity getLastActivity() {
+        synchronized (mActivityManager) {
+            if (mActivityManager.size() > 0) {
+                return mActivityManager.get(mActivityManager.size() - 1);
+            }
+            return null;
+        }
+    }
+
+
+    /**
      * 移除activity
      *
      * @param activity
      */
     public void removeActivity(Activity activity) {
         synchronized (mActivityManager) {
-            if (!isExiting)
-                mActivityManager.remove(activity);
+            mActivityManager.remove(activity);
         }
     }
 
@@ -120,6 +134,7 @@ public class App extends Application {
             for (Activity activity : mActivityManager) {
                 activity.finish();
             }
+            mActivityManager.clear();
             //退出进程
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(0);

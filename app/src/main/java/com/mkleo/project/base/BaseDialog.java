@@ -40,7 +40,7 @@ public abstract class BaseDialog extends Dialog {
             } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
                 getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
             } else {
-                getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+                getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG);
             }
         }
         onDialogCreate(mView);

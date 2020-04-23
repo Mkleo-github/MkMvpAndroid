@@ -1,6 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#3F51B5</color>
+    <color name="toast_bg">#dddfe0</color>
+    <color name="colorTrans">#00000000</color>
+    <color name="drawer_item_bg_p">#e8e8e8</color>
+    <color name="drawer_item_bg_n">#fffff9</color>
+    <color name="drawer_header_text">#2c2c2c</color>
+
+    <color name="colorBackground">#EEEEEE</color>
+    <color name="assist_gray">#666666</color>
+
+    <!--分割线颜色-->
+    <color name="line_bg">#dfdfdf</color>
+    <!--白色字体-->
+    <color name="white">#ffffff</color>
+    <!--头部渐变色start-->
+    <color name="title_bg_start_blue">#26abf7</color>
+    <!--头部渐变色end-->
+    <color name="title_bg_end_blue">#1087ed</color>
+    <!--选中群名蓝色-->
+    <color name="group_name_blue">#1087ed</color>
+    <!--头部对讲信息蓝色-->
+    <color name="title_audio_info_blue">#1087ed</color>
+    <!--文件回传底色-->
+    <color name="sendfile_bg_white">#f9f9f9</color>
+    <!--按钮蓝色-->
+    <color name="btn_blue_normal">#1087ed</color>
+    <!--按钮按住蓝色-->
+    <color name="btn_blue_pressed">#0a72cb</color>
+    <!--黑色字体-->
+    <color name="font_black">#000000</color>
+    <!--页面背景色-->
+    <color name="page_bg">#eaeaea</color>
+    <!--按钮绿色-->
+    <color name="btn_green_normal">#09bb07</color>
+    <!--按钮按住绿色-->
+    <color name="btn_green_pressed">#02b000</color>
+    <!--按钮红色-->
+    <color name="btn_red_normal">#e05946</color>
+    <!--按钮按住红色-->
+    <color name="btn_red_pressed">#ba4a3a</color>
+    <!--按钮灰色背景-->
+    <color name="btn_gray_normal">#fbfbfb</color>
+    <!--按钮灰色描边-->
+    <color name="btn_gray_stroke">#d5d5d5</color>
+    <!--灰色字体-->
+    <color name="font_gray_normal">#666666</color>
+    <!--灰色字体不可点击-->
+    <color name="font_gray_unable">#d5d5d7</color>
+    <!--半透明红色-->
+    <color name="trans_red">#A0e05946</color>
+
+    <!--登录字体灰-->
+    <color name="login_font_gray">#606060</color>
+    <!--输入提示灰-->
+    <color name="font_tips_gray">#b2b2b2</color>
+    <!--来电背景黑色-->
+    <color name="black_bg">#333333</color>
+    <!--GPS头部蓝色-->
+    <color name="dialog_title_blue">#cce6ff</color>
+    <!--GPS头部标题1-->
+    <color name="dialog_title_one">#006bee</color>
+    <!--GPS头部标题2-->
+    <color name="dialog_title_two">#5da8f6</color>
+    <!-- dialog line -->
+    <color name="alertdialog_line">#c6c6c6</color>
+    <!--头部蓝色主题色-->
+    <color name="title_blue">#068df9</color>
+    <color name="dialog_bag">#4f000000</color>
+    <color name="search_bg_gray">#eeeeee</color>
+    <color name="search_font_gray">#999999</color>
+    <!--红色-->
+    <color name="font_red_deep">#ff0000</color>
+    <color name="inside_color">#d1cdcd</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="background">#F9F7F8</color>
+    <color name="background_gray1">#EBEBEB</color>
+    <color name="background_gray2">#E6E6E6</color>
+    <color name="background_gray3">#D4D4D4</color>
+    <color name="background_gray4">#EFEFF4</color>
+    <color name="line">#DDDDDD</color>
+    <color name="line_btn">#BBBBBB</color>
+    <color name="text_gray1">#777777</color>
+    <color name="text_gray2">#767676</color>
+    <color name="text_blue1">#1173CB</color>
+    <color name="text_blue2">#1173CA</color>
+    <color name="panel_black">#25272A</color>
+    <color name="black">#000000</color>
+    <color name="btn_red">#D63F41</color>
+    <color name="btn_red_hover">#E8484B</color>
+    <color name="btn_blue">#0F73CB</color>
+    <color name="btn_blue_hover">#1E86E4</color>
+    <color name="btn_text">#FFFFFF</color>
+    <color name="btn_text_hover">#CCFFFFFF</color>
+    <!--蒙版-->
+    <color name="colorMask">#66000000</color>
+
+
+    <!--gray1-->
+    <color name="colorGray1">#F0F0F0</color>
+    <!--light gray-->
+    <color name="colorLightGray">#E6E6E6</color>
+    <!--gray2-->
+    <color name="colorGray2">#DCDCDC</color>
+    <!--gray3-->
+    <color name="colorGray3">#C8C8C8</color>
+    <!--gray4-->
+    <color name="colorGray4">#787878</color>
+    <!--gray5-->
+    <color name="colorGray5">#505050</color>
+    <!--gray6-->
+    <color name="colorGray6">#141414</color>
+    <!--gray7-->
+    <color name="colorGray7">#D8D8D8</color>
+
+    <color name="c1">#0ACCAC</color>
+    <color name="c2">#222b48</color>
+    <color name="c3">#F3F3F3</color>
+    <color name="c4">#F5F5F5</color>
+    <color name="c5">#D8D8D8</color>
+    <color name="c6">#FFFFFF</color>
+    <color name="c7">#000000</color>
+    <color name="c8">#FFFFFF</color>
+    <color name="c9">#777777</color>
+    <!--<color name="colorBackground">#F5F5F5</color>-->
+
+    <!--灰色背景-->
+    <color name="gray_bg">#E8E8E8</color>
+    <color name="text_main_color">#333333</color>
+    <color name="text_second_color">#666666</color>
+    <color name="text_third_color">#9a9a9a</color>
 </resources>
