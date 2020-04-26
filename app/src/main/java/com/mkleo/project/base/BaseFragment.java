@@ -3,7 +3,9 @@ package com.mkleo.project.base;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.mkleo.project.app.App;
+import com.mkleo.project.model.eventbus.Eventer;
+import com.mkleo.project.model.eventbus.IEvent;
+import com.mkleo.project.model.eventbus.IEventReceiver;
 import com.mkleo.project.utils.MkLog;
 
 import butterknife.ButterKnife;
@@ -21,16 +26,22 @@ import butterknife.Unbinder;
 /**
  * 无presenter的fragment
  */
-public abstract class BaseFragment extends Fragment implements IView {
+public abstract class BaseFragment extends Fragment implements IView, IEventReceiver {
 
     protected Activity mActivity;
     protected Context mContext;
+    private UIKit mUIKit;
     private Unbinder mUnbinder;
     protected View mView;
-    private ProgressDialog mProgressDialog;
 
     @Override
-    public final void onAttach(Context context) {
+    public final UIKit getUIKit() {
+        return mUIKit;
+    }
+
+    @CallSuper
+    @Override
+    public void onAttach(Context context) {
         if (context instanceof Activity)
             this.mActivity = (Activity) context;
         this.mContext = context;
@@ -48,62 +59,29 @@ public abstract class BaseFragment extends Fragment implements IView {
     @Override
     public final void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mUIKit = new UIKit(mActivity);
         onFragmentCreate();
         onFragmentReady();
+        Eventer.getDefault().register(getClass(), this);
     }
 
     @Override
     public final void onDestroy() {
         super.onDestroy();
+        Eventer.getDefault().unregister(getClass(), this);
         onFragmentRelease();
         onFragmentDestroy();
     }
 
-    /**
-     * 显示一个toast
-     *
-     * @param msg
-     */
     @Override
-    public void showToast(final String msg) {
-        if (null == mActivity) return;
-        mActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+    public void onEvent(IEvent event) {
 
-    /**
-     * 显示加载提示
-     *
-     * @param title
-     * @param msg
-     */
-    @Override
-    public void showProgress(String title, String msg) {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
-        }
-        mProgressDialog = ProgressDialog.show(mContext, title, msg, true, false);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setCanceledOnTouchOutside(false);
-    }
-
-    /**
-     * 隐藏
-     */
-    @Override
-    public void dismissProgress() {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
-        }
     }
 
     /**
      * fragment创建
      */
+    @CallSuper
     protected void onFragmentCreate() {
         mUnbinder = ButterKnife.bind(this, mView);
     }
@@ -111,6 +89,7 @@ public abstract class BaseFragment extends Fragment implements IView {
     /**
      * 销毁
      */
+    @CallSuper
     protected void onFragmentDestroy() {
         if (null != mUnbinder)
             mUnbinder.unbind();

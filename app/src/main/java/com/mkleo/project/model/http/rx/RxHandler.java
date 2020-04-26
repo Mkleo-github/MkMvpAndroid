@@ -132,7 +132,7 @@ public class RxHandler {
             //retrofit2返回的HttpException
             HttpException httpException = (HttpException) e;
             rxException = new RxException(httpException.code(), "网络异常");
-            MkLog.print("网络异常 Code:" + httpException.code() + " Msg:" + httpException.getMessage());
+            MkLog.print("[网络异常] Code:" + httpException.code() + " Msg:" + httpException.getMessage());
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException) {
@@ -145,7 +145,7 @@ public class RxHandler {
             //未知错误
             e.printStackTrace();
             rxException = new RxException(HttpPolicy.ErrorCode.UNKNOWN, "网络连接异常");
-            MkLog.print("未知错误信息:" + e.getMessage());
+            MkLog.print("[未知错误信息]:" + e.getMessage());
         }
 
         return rxException;

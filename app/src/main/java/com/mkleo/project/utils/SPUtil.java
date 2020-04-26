@@ -90,7 +90,7 @@ public class SPUtil {
             }
 
             boolean isCommitSuccess = editor.commit();
-            if (!isCommitSuccess) MkLog.print(TAG, "提交失败:" + key);
+            if (!isCommitSuccess) MkLog.print(TAG, "[提交失败]:" + key);
             return isCommitSuccess;
         }
 
@@ -134,7 +134,7 @@ public class SPUtil {
             editor.remove(key);
             //是否提交成功
             boolean isCommitSuccess = editor.commit();
-            if (!isCommitSuccess) MkLog.print(TAG, "删除失败:" + key);
+            if (!isCommitSuccess) MkLog.print(TAG, "[删除失败]:" + key);
             return isCommitSuccess;
         }
 
