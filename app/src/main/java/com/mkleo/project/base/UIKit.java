@@ -2,8 +2,10 @@ package com.mkleo.project.base;
 
 import android.content.Context;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Toast;
 
+import com.mkleo.project.app.App;
 import com.mkleo.project.widgets.ProgressDialog;
 import com.mkleo.project.widgets.TipsDialog;
 
@@ -17,6 +19,52 @@ public final class UIKit {
     public UIKit(Context context) {
         this.mContext = context;
         mMainHandler = new Handler(mContext.getMainLooper());
+    }
+    /**
+     * 显示处理框
+     *
+     * @param title
+     * @param content
+     * @param buttonName
+     * @param listener
+     */
+    public final void showProgress(String title, String content, String buttonName,
+                                   ProgressDialog.OnClickListener listener) {
+        if (null != mProgressDialog) {
+            if (mProgressDialog.isCurrentDialog(title, content)) {
+                //如果是当前显示dialog 不做处理
+                return;
+            }
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
+        mProgressDialog = new ProgressDialog(mContext)
+                .setContent(content)
+                .setTitle(title)
+                .setButton(buttonName, listener);
+        mProgressDialog.show();
+    }
+
+    /**
+     * 统一处理提示框(可退出应用)
+     *
+     * @param title
+     * @param content
+     */
+    public final void showProgress(String title, String content) {
+        showProgress(title, content, "退出应用", new ProgressDialog.OnClickListener() {
+            @Override
+            public void onClicked(View view) {
+                showTips("温馨提示", "您确定要退出应用吗?", null,
+                        new TipsDialog.OnClickListener() {
+                            @Override
+                            public void onClicked() {
+                                App.getSingleton().exit();
+                            }
+                        }
+                );
+            }
+        });
     }
 
     /**
