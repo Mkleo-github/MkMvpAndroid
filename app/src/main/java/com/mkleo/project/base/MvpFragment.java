@@ -14,10 +14,10 @@ public abstract class MvpFragment<T extends BasePresenter> extends BaseFragment 
 
     @Override
     protected void onFragmentCreate() {
-        super.onFragmentCreate();
         //初始化Presenter
         mPresenter = onBindPresenter();
         mPresenter.attachView(this);
+        super.onFragmentCreate();
     }
 
     @Override

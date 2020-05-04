@@ -59,17 +59,12 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
     @Override
     public final void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mUIKit = new UIKit(mActivity);
         onFragmentCreate();
-        onFragmentReady();
-        Eventer.getDefault().register(getClass(), this);
     }
 
     @Override
     public final void onDestroy() {
         super.onDestroy();
-        Eventer.getDefault().unregister(getClass(), this);
-        onFragmentRelease();
         onFragmentDestroy();
     }
 
@@ -84,6 +79,9 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
     @CallSuper
     protected void onFragmentCreate() {
         mUnbinder = ButterKnife.bind(this, mView);
+        mUIKit = new UIKit(mActivity);
+        Eventer.getDefault().register(getClass(), this);
+        onFragmentReady();
     }
 
     /**
@@ -91,6 +89,8 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
      */
     @CallSuper
     protected void onFragmentDestroy() {
+        onFragmentRelease();
+        Eventer.getDefault().unregister(getClass(), this);
         if (null != mUnbinder)
             mUnbinder.unbind();
     }

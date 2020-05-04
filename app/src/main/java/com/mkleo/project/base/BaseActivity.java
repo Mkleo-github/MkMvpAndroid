@@ -39,21 +39,14 @@ public abstract class BaseActivity extends PermissionActivity implements IView, 
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
-        mAcitivty = this;
-        mUIKit = new UIKit(this);
         onActivityCreate();
-        onActivityReady();
-        //获取权限
-        Eventer.getDefault().register(getClass(), this);
     }
 
 
     @Override
     protected final void onDestroy() {
-        super.onDestroy();
-        Eventer.getDefault().unregister(getClass(), this);
-        onActivityRelease();
         onActivityDestroy();
+        super.onDestroy();
     }
 
     /**
@@ -65,6 +58,11 @@ public abstract class BaseActivity extends PermissionActivity implements IView, 
         App.getSingleton().addActivity(this);
         //绑定bufferKnife
         mUnbinder = ButterKnife.bind(this);
+        mAcitivty = this;
+        mUIKit = new UIKit(this);
+        //获取权限
+        Eventer.getDefault().register(getClass(), this);
+        onActivityReady();
     }
 
     /**
@@ -72,6 +70,8 @@ public abstract class BaseActivity extends PermissionActivity implements IView, 
      */
     @CallSuper
     protected void onActivityDestroy() {
+        onActivityRelease();
+        Eventer.getDefault().unregister(getClass(), this);
         if (null != mUnbinder) mUnbinder.unbind();
         App.getSingleton().removeActivity(this);
     }

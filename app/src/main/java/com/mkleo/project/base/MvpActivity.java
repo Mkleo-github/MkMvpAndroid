@@ -19,10 +19,10 @@ public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity 
 
     @Override
     protected void onActivityCreate() {
-        super.onActivityCreate();
         //初始化Presenter
         mPresenter = onBindPresenter();
         mPresenter.attachView(this);
+        super.onActivityCreate();
     }
 
     @Override
