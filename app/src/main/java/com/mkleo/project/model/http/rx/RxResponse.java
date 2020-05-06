@@ -35,21 +35,25 @@ public abstract class RxResponse<T extends Response.Data> implements Observer<T>
             onError(rxException.getCode(), rxException.getMessage());
         } else {
             e.printStackTrace();
-            onError(e.hashCode(), "" + e.getMessage());
+            onError(e.hashCode(), e.getMessage());
         }
-        //会在执行结束后回收防止内存泄漏
-        if (null != mDisposable && !mDisposable.isDisposed())
-            mDisposable.dispose();
+        release();
     }
 
     @Override
     public final void onComplete() {
-        //会在执行结束后回收防止内存泄漏
-        if (null != mDisposable && !mDisposable.isDisposed())
-            mDisposable.dispose();
+        release();
     }
 
-    protected abstract void onError(int errCode, String errMessage);
+    protected abstract void onError(int code, String msg);
 
     protected abstract void onResponse(T t);
+
+    private void release() {
+        //会在执行结束后回收防止内存泄漏
+        if (null != mDisposable && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+            mDisposable = null;
+        }
+    }
 }

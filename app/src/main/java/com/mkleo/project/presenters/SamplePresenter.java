@@ -26,7 +26,7 @@ public class SamplePresenter extends BasePresenter<SampleContract.View> implemen
                     }
 
                     @Override
-                    protected void onError(int errCode, String errMessage) {
+                    protected void onError(int code, String msg) {
 
                     }
                 });
