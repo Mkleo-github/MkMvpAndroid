@@ -11,6 +11,8 @@ import android.view.WindowManager;
 import com.mkleo.project.model.http.HttpFactory;
 import com.mkleo.project.utils.CrashHandler;
 import com.mkleo.project.utils.MkLog;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +80,11 @@ public class App extends Application {
         //初始化HTTP
         HttpFactory.init(getApplicationContext(), Constants.Path.HTTP_CACHE);
         HttpFactory.appService().linkService(Constants.MAIN_HOST);
+        //初始化数据库
+        FlowManager.init(
+                new FlowConfig.Builder(this)
+                        .build()
+        );
     }
 
     @Override
