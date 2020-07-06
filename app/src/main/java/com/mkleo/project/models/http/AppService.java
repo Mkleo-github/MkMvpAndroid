@@ -31,16 +31,17 @@ public class AppService extends HttpService<AppService.AppServiceInterface, AppS
         return new AppServiceProxy(service);
     }
 
-    public static class AppServiceProxy extends HttpServiceProxy<AppServiceInterface> {
+    public static class AppServiceProxy extends HttpServiceProxy<AppServiceInterface> implements AppServiceInterface {
 
-        AppServiceProxy(AppServiceInterface service) {
+        public AppServiceProxy(AppServiceInterface service) {
             super(service);
         }
 
+
+        @Override
         public Observable<Response<LoginData>> login(String userName, String password) {
             return getServiceInterface().login(userName, password);
         }
-
     }
 
     interface AppServiceInterface {

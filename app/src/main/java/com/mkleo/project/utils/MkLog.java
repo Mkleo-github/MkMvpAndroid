@@ -74,11 +74,9 @@ public class MkLog {
                 Log.i(MAIN_TAG, log);
                 break;
 
-
             case LogLv.W:
                 Log.w(MAIN_TAG, log);
                 break;
-
 
             case LogLv.E:
                 Log.e(MAIN_TAG, log);

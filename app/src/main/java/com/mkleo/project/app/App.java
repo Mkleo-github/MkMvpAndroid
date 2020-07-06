@@ -164,7 +164,7 @@ public class App extends Application {
     }
 
     /**
-     * 获取屏幕像素大小(默认为竖屏状态下)
+     * 获取屏幕像素大小
      */
     private void getScreenSize() {
         WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
@@ -173,10 +173,5 @@ public class App extends Application {
         display.getMetrics(dm);
         mScreenWidth = dm.widthPixels;
         mScreenHeight = dm.heightPixels;
-        if (mScreenWidth > mScreenHeight) {
-            int t = mScreenHeight;
-            mScreenHeight = mScreenWidth;
-            mScreenWidth = t;
-        }
     }
 }
