@@ -13,6 +13,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public class HttpClient {
 
+    private HttpClient() {
+
+    }
+
     //服务管理器
     private static HttpServiceManager sServiceManager = new HttpServiceManager();
 
