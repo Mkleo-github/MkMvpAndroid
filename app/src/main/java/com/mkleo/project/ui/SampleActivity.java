@@ -5,9 +5,9 @@ import android.view.View;
 import com.mkleo.project.R;
 import com.mkleo.project.base.MvpActivity;
 import com.mkleo.project.bean.event.LoginEvent;
-import com.mkleo.project.model.eventbus.Eventer;
-import com.mkleo.project.model.eventbus.IEvent;
-import com.mkleo.project.model.eventbus.IEventReceiver;
+import com.mkleo.project.models.eventbus.Eventer;
+import com.mkleo.project.models.eventbus.IEvent;
+import com.mkleo.project.models.eventbus.IEventReceiver;
 import com.mkleo.project.presenters.SamplePresenter;
 
 /**

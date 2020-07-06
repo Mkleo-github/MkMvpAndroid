@@ -1,4 +1,4 @@
-package com.mkleo.project.model.http;
+package com.mkleo.project.models.http;
 
 /**
  * 协议

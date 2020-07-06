@@ -1,4 +1,4 @@
-package com.mkleo.project.model.eventbus;
+package com.mkleo.project.models.eventbus;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

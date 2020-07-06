@@ -1,4 +1,4 @@
-package com.mkleo.project.model.http.service;
+package com.mkleo.project.models.http.service;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -20,10 +20,10 @@ class ServiceCreator {
      * @param okHttpClient
      * @param service
      * @param host
-     * @param <T>
+     * @param <Service>
      * @return
      */
-    static <T> T create(OkHttpClient okHttpClient, Class<T> service, String host) {
+    static <Service> Service create(OkHttpClient okHttpClient, Class<Service> service, String host) {
         if (null == okHttpClient) throw new RuntimeException("OkHttpClient uninitialized!");
         Retrofit gankRetrofit = new Retrofit.Builder()
                 .baseUrl(host)

@@ -8,7 +8,8 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.mkleo.project.model.http.HttpFactory;
+import com.mkleo.project.models.http.HttpClient;
+import com.mkleo.project.models.http.service.AppService;
 import com.mkleo.project.utils.CrashHandler;
 import com.mkleo.project.utils.MkLog;
 import com.raizlabs.android.dbflow.config.FlowConfig;
@@ -77,9 +78,8 @@ public class App extends Application {
         initCrashHandler();
         //获取屏幕宽高
         getScreenSize();
-        //初始化HTTP
-        HttpFactory.init(getApplicationContext(), Constants.Path.HTTP_CACHE);
-        HttpFactory.appService().linkService(Constants.MAIN_HOST);
+        //设置服务
+        HttpClient.linkService(AppService.class, Constants.MAIN_HOST);
         //初始化数据库
         FlowManager.init(
                 new FlowConfig.Builder(this)

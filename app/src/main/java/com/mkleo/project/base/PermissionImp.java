@@ -3,9 +3,9 @@ package com.mkleo.project.base;
 import android.app.Activity;
 import android.content.DialogInterface;
 
-import com.mkleo.project.model.permissions.AppSettingsDialog;
-import com.mkleo.project.model.permissions.PermissionCallback;
-import com.mkleo.project.model.permissions.Permissions;
+import com.mkleo.project.models.permissions.AppSettingsDialog;
+import com.mkleo.project.models.permissions.PermissionCallback;
+import com.mkleo.project.models.permissions.Permissions;
 
 public class PermissionImp {
 
@@ -15,7 +15,9 @@ public class PermissionImp {
 
     public PermissionImp(IPermissonInterface permissonInterface) {
         this.mPermissonInterface = permissonInterface;
-        this.mRequestPermissions = mPermissonInterface.getRequestPermissions();
+        if (null != mPermissonInterface) {
+            this.mRequestPermissions = mPermissonInterface.getRequestPermissions();
+        }
     }
 
     /**

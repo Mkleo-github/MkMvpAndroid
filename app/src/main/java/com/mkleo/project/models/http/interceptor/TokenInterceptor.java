@@ -1,4 +1,6 @@
-package com.mkleo.project.model.http.interceptor;
+package com.mkleo.project.models.http.interceptor;
+
+import android.text.TextUtils;
 
 import java.io.IOException;
 
@@ -11,27 +13,19 @@ import okhttp3.Response;
  */
 public class TokenInterceptor implements Interceptor {
 
-    private String mToken = null;
+    private String mToken;
+
+    public TokenInterceptor() {
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-
         final Request.Builder builder = chain.request().newBuilder();
-
-        if (mToken == null) {
-            return chain.proceed(builder.build());
-        }
-
-        builder.addHeader("token", mToken);
-
+        if (!TextUtils.isEmpty(mToken))
+            builder.addHeader("token", mToken);
         return chain.proceed(builder.build());
     }
 
-    /**
-     * 设置token
-     *
-     * @param token
-     */
     public void setToken(String token) {
         this.mToken = token;
     }

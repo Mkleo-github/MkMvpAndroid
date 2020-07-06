@@ -1,4 +1,4 @@
-package com.mkleo.project.model.permissions;
+package com.mkleo.project.models.permissions;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

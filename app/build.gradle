@@ -29,7 +29,7 @@ dependencies {
     //view插件
     //noinspection AnnotationProcessorOnCompilePath
     api 'com.jakewharton:butterknife:8.8.1'
-    api 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //http
     api "io.reactivex.rxjava2:rxjava:2.2.0" // 必要rxjava2依赖
     api "io.reactivex.rxjava2:rxandroid:2.0.2" // 必要rxandrroid依赖，切线程时需要用到
@@ -44,7 +44,7 @@ dependencies {
     //rx permission
     api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     //dbflow
-    api 'com.github.Raizlabs.DBFlow:dbflow-processor:4.2.4'
+    annotationProcessor 'com.github.Raizlabs.DBFlow:dbflow-processor:4.2.4'
     api 'com.github.Raizlabs.DBFlow:dbflow-core:4.2.4'
     api 'com.github.Raizlabs.DBFlow:dbflow-rx:4.2.4'
     api 'com.github.Raizlabs.DBFlow:dbflow:4.2.4'

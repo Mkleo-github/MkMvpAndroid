@@ -1,4 +1,4 @@
-package com.mkleo.project.model.http.interceptor;
+package com.mkleo.project.models.http.interceptor;
 
 import android.content.Context;
 

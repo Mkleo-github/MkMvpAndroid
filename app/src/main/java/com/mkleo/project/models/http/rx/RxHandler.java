@@ -1,10 +1,10 @@
-package com.mkleo.project.model.http.rx;
+package com.mkleo.project.models.http.rx;
 
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
 import com.mkleo.project.bean.http.base.Response;
-import com.mkleo.project.model.http.HttpPolicy;
+import com.mkleo.project.models.http.HttpPolicy;
 import com.mkleo.project.utils.MkLog;
 
 import org.json.JSONException;

@@ -3,9 +3,9 @@ package com.mkleo.project.presenters;
 import com.mkleo.project.base.BasePresenter;
 import com.mkleo.project.bean.http.LoginData;
 import com.mkleo.project.bean.http.base.Response;
-import com.mkleo.project.model.http.HttpFactory;
-import com.mkleo.project.model.http.rx.RxResponse;
-import com.mkleo.project.model.http.rx.RxHandler;
+import com.mkleo.project.models.http.HttpClient;
+import com.mkleo.project.models.http.rx.RxResponse;
+import com.mkleo.project.models.http.rx.RxHandler;
 import com.mkleo.project.presenters.contracts.SampleContract;
 
 public class SamplePresenter extends BasePresenter<SampleContract.View> implements SampleContract.Presenter {
@@ -13,7 +13,7 @@ public class SamplePresenter extends BasePresenter<SampleContract.View> implemen
     @Override
     public void login(String userName, String passWord, String imei) {
 
-        HttpFactory.appService().request()
+        HttpClient.appService().request()
                 .login(userName, passWord)
                 .compose(RxHandler.<Response<LoginData>>rxScheduler())
                 .compose(RxHandler.<LoginData>rxResponse())

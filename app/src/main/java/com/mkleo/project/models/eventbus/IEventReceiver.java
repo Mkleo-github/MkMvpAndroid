@@ -1,4 +1,4 @@
-package com.mkleo.project.model.eventbus;
+package com.mkleo.project.models.eventbus;
 
 /**
  * 接收器接口

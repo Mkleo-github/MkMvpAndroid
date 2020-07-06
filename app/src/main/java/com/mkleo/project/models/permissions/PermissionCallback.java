@@ -1,4 +1,4 @@
-package com.mkleo.project.model.permissions;
+package com.mkleo.project.models.permissions;
 
 /**
  * 权限获取回调

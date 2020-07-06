@@ -1,4 +1,4 @@
-package com.mkleo.project.model.http.service;
+package com.mkleo.project.models.http.service;
 
 
 import com.mkleo.project.bean.http.LoginData;
@@ -15,24 +15,28 @@ import retrofit2.http.POST;
  */
 public class AppService extends ServiceWrapper<AppService.IAppService, AppService.AppServiceProxy> {
 
-    public AppService(OkHttpClient okHttpClient) {
+    AppService(OkHttpClient okHttpClient) {
         super(okHttpClient);
     }
 
     @Override
-    protected AppServiceProxy onCreateServiceProxy() {
-        return new AppServiceProxy(IAppService.class);
+    protected Class<IAppService> getServiceInterface() {
+        return IAppService.class;
     }
 
+    @Override
+    protected AppServiceProxy onCreateServiceProxy(IAppService service) {
+        return new AppServiceProxy(service);
+    }
 
-    public class AppServiceProxy extends ServiceProxy<AppService.IAppService> {
+    public static class AppServiceProxy extends ServiceProxy<AppService.IAppService> {
 
-        AppServiceProxy(Class<IAppService> from) {
-            super(from);
+        AppServiceProxy(IAppService service) {
+            super(service);
         }
 
         public Observable<Response<LoginData>> login(String userName, String password) {
-            return mService.login(userName, password);
+            return getService().login(userName, password);
         }
 
     }

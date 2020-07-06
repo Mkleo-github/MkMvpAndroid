@@ -1,8 +1,8 @@
 package com.mkleo.project.bean.event;
 
 
-import com.mkleo.project.model.eventbus.Event;
-import com.mkleo.project.model.eventbus.IEvent;
+import com.mkleo.project.models.eventbus.Event;
+import com.mkleo.project.models.eventbus.IEvent;
 
 /**
  * 登录事件样例

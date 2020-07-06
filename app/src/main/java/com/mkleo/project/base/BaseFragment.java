@@ -1,9 +1,7 @@
 package com.mkleo.project.base;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
@@ -12,12 +10,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.mkleo.project.app.App;
-import com.mkleo.project.model.eventbus.Eventer;
-import com.mkleo.project.model.eventbus.IEvent;
-import com.mkleo.project.model.eventbus.IEventReceiver;
+import com.mkleo.project.models.eventbus.Eventer;
+import com.mkleo.project.models.eventbus.IEvent;
+import com.mkleo.project.models.eventbus.IEventReceiver;
 import com.mkleo.project.utils.MkLog;
 
 import butterknife.ButterKnife;

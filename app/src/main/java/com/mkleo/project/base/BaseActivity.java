@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.mkleo.project.app.App;
-import com.mkleo.project.model.eventbus.Eventer;
-import com.mkleo.project.model.eventbus.IEvent;
-import com.mkleo.project.model.eventbus.IEventReceiver;
+import com.mkleo.project.models.eventbus.Eventer;
+import com.mkleo.project.models.eventbus.IEvent;
+import com.mkleo.project.models.eventbus.IEventReceiver;
 import com.mkleo.project.utils.MkLog;
 
 import butterknife.ButterKnife;

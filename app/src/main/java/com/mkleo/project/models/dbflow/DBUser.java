@@ -1,4 +1,4 @@
-package com.mkleo.project.model.dbflow;
+package com.mkleo.project.models.dbflow;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 
