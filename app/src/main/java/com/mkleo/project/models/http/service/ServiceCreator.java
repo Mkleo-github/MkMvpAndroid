@@ -18,12 +18,12 @@ class ServiceCreator {
      * 创建访问代理实体
      *
      * @param okHttpClient
-     * @param service
+     * @param serviceInterface
      * @param host
-     * @param <Service>
+     * @param <ServiceInterface>
      * @return
      */
-    static <Service> Service create(OkHttpClient okHttpClient, Class<Service> service, String host) {
+    static <ServiceInterface> ServiceInterface create(OkHttpClient okHttpClient, Class<ServiceInterface> serviceInterface, String host) {
         if (null == okHttpClient) throw new RuntimeException("OkHttpClient uninitialized!");
         Retrofit gankRetrofit = new Retrofit.Builder()
                 .baseUrl(host)
@@ -31,7 +31,7 @@ class ServiceCreator {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        return gankRetrofit.create(service);
+        return gankRetrofit.create(serviceInterface);
     }
 
 }

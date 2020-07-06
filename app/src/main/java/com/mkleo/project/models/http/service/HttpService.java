@@ -8,19 +8,19 @@ import okhttp3.OkHttpClient;
 /**
  * 服务访问封装
  *
- * @param <Service> 服务实体
- * @param <Proxy>   服务代理
+ * @param <ServiceInterface> 服务接口
+ * @param <ServiceProxy>     服务代理
  */
-public abstract class ServiceWrapper<Service, Proxy extends ServiceProxy<Service>> {
+public abstract class HttpService<ServiceInterface, ServiceProxy extends HttpServiceProxy<ServiceInterface>> implements IHttpService<ServiceInterface, ServiceProxy> {
 
     /* OkHttp */
     private OkHttpClient mOkHttpClient;
     /* 访问服务代理 */
-    private Proxy mServiceProxy;
+    private ServiceProxy mServiceProxy;
     /* 主机地址 */
     private String mHost = "";
 
-    ServiceWrapper(OkHttpClient okHttpClient) {
+    public HttpService(OkHttpClient okHttpClient) {
         this.mOkHttpClient = okHttpClient;
     }
 
@@ -29,24 +29,25 @@ public abstract class ServiceWrapper<Service, Proxy extends ServiceProxy<Service
      *
      * @return
      */
-    protected abstract Class<Service> getServiceInterface();
+    protected abstract Class<ServiceInterface> getServiceInterface();
 
     /**
      * 创建访问代理
      *
      * @return
      */
-    protected abstract Proxy onCreateServiceProxy(Service service);
+    protected abstract ServiceProxy onCreateServiceProxy(ServiceInterface service);
 
     /**
      * 关联主机地址
      *
      * @param host 主机地址
      */
+    @Override
     public synchronized void linkService(String host) {
         if (host != null && !host.equals(mHost)) {
             //创建实体
-            Service service = ServiceCreator.create(mOkHttpClient, getServiceInterface(), host);
+            ServiceInterface service = ServiceCreator.create(mOkHttpClient, getServiceInterface(), host);
             mServiceProxy = onCreateServiceProxy(service);
             mHost = host;
         }
@@ -57,6 +58,7 @@ public abstract class ServiceWrapper<Service, Proxy extends ServiceProxy<Service
      *
      * @param token
      */
+    @Override
     public synchronized void setToken(String token) {
         for (Interceptor interceptor : mOkHttpClient.interceptors()) {
             if (interceptor instanceof TokenInterceptor) {
@@ -71,7 +73,8 @@ public abstract class ServiceWrapper<Service, Proxy extends ServiceProxy<Service
      *
      * @return
      */
-    public Proxy request() {
+    @Override
+    public ServiceProxy request() {
         if (null == mServiceProxy) throw new RuntimeException("Unlink service");
         return mServiceProxy;
     }

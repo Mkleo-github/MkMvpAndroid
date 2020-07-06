@@ -1,18 +1,10 @@
 package com.mkleo.project.models.http;
 
-import android.content.Context;
-import android.text.TextUtils;
-
-import com.mkleo.project.models.http.interceptor.CacheInterceptor;
 import com.mkleo.project.models.http.interceptor.TokenInterceptor;
-import com.mkleo.project.models.http.service.AppService;
-import com.mkleo.project.models.http.service.ServiceManager;
-import com.mkleo.project.models.http.service.ServiceWrapper;
+import com.mkleo.project.models.http.service.IHttpService;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -22,17 +14,26 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class HttpClient {
 
     //服务管理器
-    private static ServiceManager sServiceManager = new ServiceManager();
+    private static HttpServiceManager sServiceManager = new HttpServiceManager();
 
-    public static void linkService(Class<? extends ServiceWrapper<?, ?>> service, String host) {
-        sServiceManager.setupService(getOkHttpClient(), service);
-        sServiceManager.getService(service).linkService(host);
+    /**
+     * 创建服务
+     *
+     * @param service
+     * @param host
+     */
+    public static void linkService(Class<? extends IHttpService<?, ?>> service, String host) {
+        sServiceManager.createService(getOkHttpClient(), service).linkService(host);
     }
 
+    /**
+     * 应用服务
+     *
+     * @return
+     */
     public static AppService appService() {
         return sServiceManager.getService(AppService.class);
     }
-
 
     /**
      * 获取OkHttp客户端

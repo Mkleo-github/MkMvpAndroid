@@ -9,7 +9,7 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import com.mkleo.project.models.http.HttpClient;
-import com.mkleo.project.models.http.service.AppService;
+import com.mkleo.project.models.http.AppService;
 import com.mkleo.project.utils.CrashHandler;
 import com.mkleo.project.utils.MkLog;
 import com.raizlabs.android.dbflow.config.FlowConfig;

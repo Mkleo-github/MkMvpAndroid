@@ -1,8 +1,10 @@
-package com.mkleo.project.models.http.service;
+package com.mkleo.project.models.http;
 
 
 import com.mkleo.project.bean.http.LoginData;
 import com.mkleo.project.bean.http.base.Response;
+import com.mkleo.project.models.http.service.HttpService;
+import com.mkleo.project.models.http.service.HttpServiceProxy;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -13,35 +15,35 @@ import retrofit2.http.POST;
 /**
  * 服务访问的实体
  */
-public class AppService extends ServiceWrapper<AppService.IAppService, AppService.AppServiceProxy> {
+public class AppService extends HttpService<AppService.AppServiceInterface, AppService.AppServiceProxy> {
 
-    AppService(OkHttpClient okHttpClient) {
+    private AppService(OkHttpClient okHttpClient) {
         super(okHttpClient);
     }
 
     @Override
-    protected Class<IAppService> getServiceInterface() {
-        return IAppService.class;
+    protected Class<AppServiceInterface> getServiceInterface() {
+        return AppServiceInterface.class;
     }
 
     @Override
-    protected AppServiceProxy onCreateServiceProxy(IAppService service) {
+    protected AppServiceProxy onCreateServiceProxy(AppServiceInterface service) {
         return new AppServiceProxy(service);
     }
 
-    public static class AppServiceProxy extends ServiceProxy<AppService.IAppService> {
+    public static class AppServiceProxy extends HttpServiceProxy<AppServiceInterface> {
 
-        AppServiceProxy(IAppService service) {
+        AppServiceProxy(AppServiceInterface service) {
             super(service);
         }
 
         public Observable<Response<LoginData>> login(String userName, String password) {
-            return getService().login(userName, password);
+            return getServiceInterface().login(userName, password);
         }
 
     }
 
-    interface IAppService {
+    interface AppServiceInterface {
         /* 登录 */
         @FormUrlEncoded
         @POST("app/auth/login.exjson")
