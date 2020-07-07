@@ -9,5 +9,5 @@ public interface IView {
      *
      * @return
      */
-    UIKit getUIKit();
+    UiKit getUiKit();
 }

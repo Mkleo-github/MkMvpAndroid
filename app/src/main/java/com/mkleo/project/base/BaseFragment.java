@@ -26,12 +26,12 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
 
     protected Activity mActivity;
     protected Context mContext;
-    private UIKit mUIKit;
+    private UiKit mUIKit;
     private Unbinder mUnbinder;
     protected View mView;
 
     @Override
-    public final UIKit getUIKit() {
+    public final UiKit getUiKit() {
         return mUIKit;
     }
 
@@ -75,7 +75,7 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
     @CallSuper
     protected void onFragmentCreate() {
         mUnbinder = ButterKnife.bind(this, mView);
-        mUIKit = new UIKit(mActivity);
+        mUIKit = new UiKit(mActivity);
         Eventer.getDefault().register(getClass(), this);
         onFragmentReady();
     }

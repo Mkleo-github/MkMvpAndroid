@@ -9,14 +9,14 @@ import com.mkleo.project.app.App;
 import com.mkleo.project.widgets.ProgressDialog;
 import com.mkleo.project.widgets.TipsDialog;
 
-public final class UIKit {
+public final class UiKit {
 
     private ProgressDialog mProgressDialog;
     private TipsDialog mTipsDialog;
     private Context mContext;
     private Handler mMainHandler;
 
-    public UIKit(Context context) {
+    public UiKit(Context context) {
         this.mContext = context;
         mMainHandler = new Handler(mContext.getMainLooper());
     }
