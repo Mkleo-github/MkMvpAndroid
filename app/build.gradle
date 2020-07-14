@@ -14,22 +14,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.android.support:appcompat-v7:28.0.0'
-    api 'com.android.support.constraint:constraint-layout:1.1.3'
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     //recyclerview
-    api 'com.android.support:recyclerview-v7:28.0.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
     //解除方法数目65535限制
-    api 'com.android.support:multidex:1.0.3'
+    api 'androidx.multidex:multidex:2.0.1'
     //view插件
     //noinspection AnnotationProcessorOnCompilePath
-    api 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    api 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     //http
     api "io.reactivex.rxjava2:rxjava:2.2.0" // 必要rxjava2依赖
     api "io.reactivex.rxjava2:rxandroid:2.0.2" // 必要rxandrroid依赖，切线程时需要用到
@@ -49,5 +54,5 @@ dependencies {
     api 'com.github.Raizlabs.DBFlow:dbflow-rx:4.2.4'
     api 'com.github.Raizlabs.DBFlow:dbflow:4.2.4'
     //livedata
-    api 'android.arch.lifecycle:extensions:1.1.1'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }

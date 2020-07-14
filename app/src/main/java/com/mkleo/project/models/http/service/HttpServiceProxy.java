@@ -1,6 +1,6 @@
 package com.mkleo.project.models.http.service;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * 服务访问代理

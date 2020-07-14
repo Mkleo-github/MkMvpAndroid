@@ -3,7 +3,7 @@ package com.mkleo.project.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;

@@ -1,7 +1,7 @@
 package com.mkleo.project.models.eventbus;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import org.greenrobot.eventbus.EventBus;
 

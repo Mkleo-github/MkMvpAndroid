@@ -1,6 +1,6 @@
 package com.mkleo.project.models.http;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.mkleo.project.models.http.service.IHttpService;
 

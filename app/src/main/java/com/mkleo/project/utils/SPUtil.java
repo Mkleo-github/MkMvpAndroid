@@ -2,8 +2,7 @@ package com.mkleo.project.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.util.Log;
+import androidx.annotation.NonNull;
 
 public class SPUtil {
 

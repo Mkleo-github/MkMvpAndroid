@@ -2,8 +2,8 @@ package com.mkleo.project.base;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
 
 import com.mkleo.project.app.App;
 import com.mkleo.project.models.eventbus.Eventer;
