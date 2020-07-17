@@ -20,6 +20,7 @@ public final class UiKit {
         this.mContext = context;
         mMainHandler = new Handler(mContext.getMainLooper());
     }
+
     /**
      * 显示处理框
      *
@@ -30,19 +31,24 @@ public final class UiKit {
      */
     public final void showProgress(String title, String content, String buttonName,
                                    ProgressDialog.OnClickListener listener) {
-        if (null != mProgressDialog) {
-            if (mProgressDialog.isCurrentDialog(title, content)) {
-                //如果是当前显示dialog 不做处理
-                return;
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if (null != mProgressDialog) {
+                    if (mProgressDialog.isCurrentDialog(title, content)) {
+                        //如果是当前显示dialog 不做处理
+                        return;
+                    }
+                    mProgressDialog.dismiss();
+                    mProgressDialog = null;
+                }
+                mProgressDialog = new ProgressDialog(mContext)
+                        .setContent(content)
+                        .setTitle(title)
+                        .setButton(buttonName, listener);
+                mProgressDialog.show();
             }
-            mProgressDialog.dismiss();
-            mProgressDialog = null;
-        }
-        mProgressDialog = new ProgressDialog(mContext)
-                .setContent(content)
-                .setTitle(title)
-                .setButton(buttonName, listener);
-        mProgressDialog.show();
+        });
     }
 
     /**
@@ -90,17 +96,22 @@ public final class UiKit {
     public final void showTips(String title, String content,
                                String leftButton, TipsDialog.OnClickListener leftClickListener,
                                String rightButton, TipsDialog.OnClickListener rightClickListener) {
-        if (null != mTipsDialog) {
-            mTipsDialog.dismiss();
-            mTipsDialog = null;
-        }
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if (null != mTipsDialog) {
+                    mTipsDialog.dismiss();
+                    mTipsDialog = null;
+                }
 
-        mTipsDialog = new TipsDialog(mContext)
-                .setContent(content)
-                .setTitle(title)
-                .setLeftButton(leftButton, leftClickListener)
-                .setRightButton(rightButton, rightClickListener);
-        mTipsDialog.show();
+                mTipsDialog = new TipsDialog(mContext)
+                        .setContent(content)
+                        .setTitle(title)
+                        .setLeftButton(leftButton, leftClickListener)
+                        .setRightButton(rightButton, rightClickListener);
+                mTipsDialog.show();
+            }
+        });
     }
 
     /**
@@ -136,12 +147,20 @@ public final class UiKit {
      * @param msg
      */
     public final void showToast(final String msg) {
-        mMainHandler.post(new Runnable() {
+        post(new Runnable() {
             @Override
             public void run() {
                 if (null != msg)
                     Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public final void post(final Runnable runnable) {
+        mMainHandler.post(runnable);
+    }
+
+    public final void postDelayed(final Runnable runnable, long delay) {
+        mMainHandler.postDelayed(runnable, delay);
     }
 }
