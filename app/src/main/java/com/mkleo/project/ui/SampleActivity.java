@@ -1,6 +1,9 @@
 package com.mkleo.project.ui;
 
+import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.mkleo.project.R;
 import com.mkleo.project.base.MvpActivity;
@@ -18,7 +21,7 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
 
 
     @Override
-    protected SamplePresenter onBindPresenter() {
+    protected SamplePresenter getPresenter() {
         return new SamplePresenter();
     }
 
@@ -28,11 +31,12 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
     }
 
     @Override
-    protected void onActivityReady() {
+    protected void onReady(@Nullable Bundle savedInstanceState) {
+
     }
 
     @Override
-    protected void onActivityRelease() {
+    protected void onRecycling() {
     }
 
     public void login(View view) {

@@ -9,7 +9,7 @@ import org.greenrobot.eventbus.ThreadMode;
 abstract class EventReceiver implements IEventReceiver {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public final void OnSubscribe(IEvent event) {
+    public final void OnSubscribe(IEvent<?> event) {
         if (null != event) {
             this.onEvent(event);
         }

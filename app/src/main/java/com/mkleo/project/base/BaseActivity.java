@@ -34,30 +34,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
         return mUiKit;
     }
 
-    /**
-     * 无法被复写
-     *
-     * @param savedInstanceState
-     */
+    @CallSuper
     @Override
-    protected final void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
-        onActivityCreate();
-    }
-
-
-    @Override
-    protected final void onDestroy() {
-        onActivityDestroy();
-        super.onDestroy();
-    }
-
-    /**
-     * activity创建
-     */
-    @CallSuper
-    protected void onActivityCreate() {
         //将Activity加入管理
         App.getSingleton().addActivity(this);
         //绑定bufferKnife
@@ -65,23 +46,23 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
         mAcitivty = this;
         mUiKit = new UiKit(this);
         Eventer.getDefault().register(getClass(), this);
-        onActivityReady();
+        onReady(savedInstanceState);
         //获取权限
         mPermissionImp = new PermissionImp(getPermissionInterface());
         mPermissionImp.requestPermissions(this);
     }
 
-    /**
-     * Activity销毁
-     */
-    @CallSuper
-    protected void onActivityDestroy() {
-        onActivityRelease();
-        Eventer.getDefault().unregister(getClass(), this);
-        if (null != mUnbinder) mUnbinder.unbind();
-        App.getSingleton().removeActivity(this);
-    }
 
+    @CallSuper
+    @Override
+    protected void onDestroy() {
+        onRecycling();
+        Eventer.getDefault().unregister(getClass(), this);
+        if (null != mUnbinder)
+            mUnbinder.unbind();
+        App.getSingleton().removeActivity(this);
+        super.onDestroy();
+    }
 
     @CallSuper
     @Override
@@ -96,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
      * @param event
      */
     @Override
-    public void onEvent(IEvent event) {
+    public void onEvent(IEvent<?> event) {
 
     }
 
@@ -110,12 +91,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
     /**
      * Activity准备完毕
      */
-    protected abstract void onActivityReady();
+    protected abstract void onReady(@Nullable Bundle savedInstanceState);
 
     /**
      * Activity正在回收
      */
-    protected abstract void onActivityRelease();
+    protected abstract void onRecycling();
 
 
     /**

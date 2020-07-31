@@ -1,5 +1,9 @@
 package com.mkleo.project.base;
 
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+
 /**
  * MVP Activity
  *
@@ -15,22 +19,23 @@ public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity 
      *
      * @return
      */
-    protected abstract T onBindPresenter();
+    protected abstract T getPresenter();
 
     @Override
-    protected void onActivityCreate() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         //初始化Presenter
-        mPresenter = onBindPresenter();
+        mPresenter = getPresenter();
         mPresenter.attachView(this);
-        super.onActivityCreate();
+        super.onCreate(savedInstanceState);
     }
 
     @Override
-    protected void onActivityDestroy() {
+    protected void onDestroy() {
         if (mPresenter != null) {
             mPresenter.detachView();
             mPresenter = null;
         }
-        super.onActivityDestroy();
+        super.onDestroy();
     }
+
 }
