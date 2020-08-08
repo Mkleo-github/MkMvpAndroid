@@ -2,6 +2,7 @@ package com.mkleo.project.base;
 
 import android.os.Bundle;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
 
 /**
@@ -19,16 +20,19 @@ public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity 
      *
      * @return
      */
-    protected abstract T getPresenter();
+    protected abstract T bindPresenter();
 
+    @CallSuper
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //初始化Presenter
-        mPresenter = getPresenter();
+        if (null == mPresenter)
+            mPresenter = bindPresenter();
         mPresenter.attachView(this);
         super.onCreate(savedInstanceState);
     }
 
+    @CallSuper
     @Override
     protected void onDestroy() {
         if (mPresenter != null) {
@@ -37,5 +41,4 @@ public abstract class MvpActivity<T extends BasePresenter> extends BaseActivity 
         }
         super.onDestroy();
     }
-
 }

@@ -30,22 +30,22 @@ public class Eventer {
     }
 
     //线程安全
-    private final Hashtable<Class, Vector<IEventReceiver>> mReceivers = new Hashtable<>();
+    private final Hashtable<Class<?>, Vector<IEventReceiver>> mReceivers = new Hashtable<>();
     //事件接收器
     private final EventReceiver mEventReceiver = new EventReceiver() {
         @Override
-        public void onEvent(IEvent event) {
+        public void onEvent(IEvent<?> event) {
             //获取过滤字段
-            final Class[] filters = event.getFilters();
+            final Class<?>[] filters = event.getFilters();
             if (null == filters) {
                 //发送给所有
-                for (Map.Entry<Class, Vector<IEventReceiver>> entry : mReceivers.entrySet()) {
+                for (Map.Entry<Class<?>, Vector<IEventReceiver>> entry : mReceivers.entrySet()) {
                     for (IEventReceiver eventReceiver : entry.getValue()) {
                         eventReceiver.onEvent(event);
                     }
                 }
             } else {
-                for (Class filter : filters) {
+                for (Class<?> filter : filters) {
                     Vector<IEventReceiver> eventReceivers = mReceivers.get(filter);
                     //分发消息
                     if (null != eventReceivers) {
@@ -65,7 +65,7 @@ public class Eventer {
      * @param filter
      * @param eventReceiver
      */
-    public synchronized void register(Class filter, IEventReceiver eventReceiver) {
+    public synchronized void register(Class<?> filter, IEventReceiver eventReceiver) {
         if (null != filter) {
             Vector<IEventReceiver> eventReceivers = mReceivers.get(filter);
             if (null == eventReceivers) {
@@ -88,7 +88,7 @@ public class Eventer {
      * @param filter
      * @param eventReceiver
      */
-    public synchronized void unregister(Class filter, IEventReceiver eventReceiver) {
+    public synchronized void unregister(Class<?> filter, IEventReceiver eventReceiver) {
         if (null != filter) {
             Vector<IEventReceiver> eventReceivers = mReceivers.get(filter);
             if (null != eventReceivers) {
@@ -106,7 +106,7 @@ public class Eventer {
      * @param filters 目标位置
      * @param event
      */
-    public <T extends Event> void post(T event, @Nullable Class... filters) {
+    public <T extends Event<?>> void post(T event, @Nullable Class<?>... filters) {
         if (null != event) {
             event.addFilters(filters);
             EventBus.getDefault().post(event);
@@ -118,8 +118,8 @@ public class Eventer {
      *
      * @param event
      */
-    public <T extends Event> void post(T event) {
-        post(event, (Class[]) null);
+    public <T extends Event<?>> void post(T event) {
+        post(event, (Class<?>[]) null);
     }
 
 

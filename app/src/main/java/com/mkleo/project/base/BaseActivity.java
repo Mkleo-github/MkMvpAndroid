@@ -58,8 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
     protected void onDestroy() {
         onRecycling();
         Eventer.getDefault().unregister(getClass(), this);
-        if (null != mUnbinder)
-            mUnbinder.unbind();
+        if (null != mUnbinder) mUnbinder.unbind();
         App.getSingleton().removeActivity(this);
         super.onDestroy();
     }

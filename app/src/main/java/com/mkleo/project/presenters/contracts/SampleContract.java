@@ -15,6 +15,5 @@ public interface SampleContract {
         void login(String userName, String passWord, String imei);
 
         void logout();
-
     }
 }

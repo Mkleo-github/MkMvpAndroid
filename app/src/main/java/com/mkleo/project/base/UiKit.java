@@ -163,4 +163,12 @@ public final class UiKit {
     public final void postDelayed(final Runnable runnable, long delay) {
         mMainHandler.postDelayed(runnable, delay);
     }
+
+    public final void removeCallback(final Runnable runnable) {
+        mMainHandler.removeCallbacks(runnable);
+    }
+
+    public final void removeAllCallbacks() {
+        mMainHandler.removeCallbacksAndMessages(null);
+    }
 }
