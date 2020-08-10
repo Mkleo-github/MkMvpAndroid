@@ -6,7 +6,6 @@ import com.mkleo.project.bean.http.base.Response;
 import com.mkleo.project.models.http.HttpClient;
 import com.mkleo.project.models.http.rx.RxHandler;
 import com.mkleo.project.models.http.rx.RxResponse;
-import com.mkleo.project.models.livedata.LiveDataFactory;
 import com.mkleo.project.presenters.contracts.SampleContract;
 
 public class SamplePresenter extends BasePresenter<SampleContract.View> implements SampleContract.Presenter {
@@ -14,8 +13,9 @@ public class SamplePresenter extends BasePresenter<SampleContract.View> implemen
     public static final String LIVEDATA_TIMER = "LIVEDATA_TIMER";
 
     public SamplePresenter() {
-        holdLiveData(LIVEDATA_TIMER, LiveDataFactory.<Integer>newLiveData());
+        this.<Integer>holdLiveData(LIVEDATA_TIMER);
     }
+
 
     @Override
     public void login(String userName, String passWord, String imei) {

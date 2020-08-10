@@ -49,11 +49,11 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
      * 持有livedata
      *
      * @param key
-     * @param liveData
      * @return
      */
-    protected void holdLiveData(@NonNull String key, @NonNull MutableLiveData<?> liveData) {
+    protected <T> void holdLiveData(@NonNull String key) {
         synchronized (mLiveDataHolder) {
+            MutableLiveData<T> liveData = new MutableLiveData<>();
             mLiveDataHolder.put(key, liveData);
         }
     }
