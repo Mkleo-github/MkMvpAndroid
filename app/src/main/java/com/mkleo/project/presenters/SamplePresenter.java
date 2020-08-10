@@ -1,17 +1,21 @@
 package com.mkleo.project.presenters;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import com.mkleo.project.base.BasePresenter;
 import com.mkleo.project.bean.http.LoginData;
 import com.mkleo.project.bean.http.base.Response;
 import com.mkleo.project.models.http.HttpClient;
-import com.mkleo.project.models.http.rx.RxResponse;
 import com.mkleo.project.models.http.rx.RxHandler;
-import com.mkleo.project.models.livedata.TimerViewModel;
+import com.mkleo.project.models.http.rx.RxResponse;
+import com.mkleo.project.models.livedata.LiveDataFactory;
 import com.mkleo.project.presenters.contracts.SampleContract;
 
 public class SamplePresenter extends BasePresenter<SampleContract.View> implements SampleContract.Presenter {
+
+    public static final String LIVEDATA_TIMER = "LIVEDATA_TIMER";
+
+    public SamplePresenter() {
+        holdLiveData(LIVEDATA_TIMER, LiveDataFactory.<Integer>newLiveData());
+    }
 
     @Override
     public void login(String userName, String passWord, String imei) {

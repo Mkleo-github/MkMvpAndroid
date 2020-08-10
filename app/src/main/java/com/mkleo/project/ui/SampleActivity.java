@@ -12,7 +12,6 @@ import com.mkleo.project.bean.event.LoginEvent;
 import com.mkleo.project.models.eventbus.Eventer;
 import com.mkleo.project.models.eventbus.IEvent;
 import com.mkleo.project.models.eventbus.IEventReceiver;
-import com.mkleo.project.models.livedata.TimerViewModel;
 import com.mkleo.project.presenters.SamplePresenter;
 
 /**
@@ -20,7 +19,6 @@ import com.mkleo.project.presenters.SamplePresenter;
  */
 public class SampleActivity extends MvpActivity<SamplePresenter> implements IEventReceiver {
 
-    private TimerViewModel mTimerViewModel = new TimerViewModel();
     private int mSencond = 0;
 
     @Override
@@ -35,12 +33,13 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
 
     @Override
     protected void onReady(@Nullable Bundle savedInstanceState) {
-        mTimerViewModel.getTimer().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                getUiKit().showToast("" + integer);
-            }
-        });
+        mPresenter.<Integer>getLiveData(SamplePresenter.LIVEDATA_TIMER)
+                .observe(this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        getUiKit().showToast("" + integer);
+                    }
+                });
     }
 
     @Override
@@ -51,7 +50,6 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
         //登录
         Eventer.getDefault().post(new LoginEvent());
         mPresenter.login("", "", "");
-
     }
 
     public void onLogoutClicked(View view) {
@@ -68,7 +66,8 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
             public void run() {
                 getUiKit().postDelayed(this, 1000);
                 mSencond++;
-                mTimerViewModel.getTimer().postValue(mSencond);
+                mPresenter.<Integer>getLiveData(SamplePresenter.LIVEDATA_TIMER)
+                        .postValue(mSencond);
             }
         }, 1000);
     }

@@ -1,11 +1,13 @@
 package com.mkleo.project.base;
 
+import androidx.lifecycle.LifecycleOwner;
+
 /**
  * View抽象
  */
-public interface IView {
+public interface IView extends LifecycleOwner {
     /**
-     * 获取界面工具
+     * UI控制器
      *
      * @return
      */
