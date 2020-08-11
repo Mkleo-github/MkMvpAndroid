@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
         //将Activity加入管理
-        App.getSingleton().addActivity(this);
+        App.instance().addActivity(this);
         //绑定bufferKnife
         mUnbinder = ButterKnife.bind(this);
         mAcitivty = this;
@@ -59,7 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
         onRecycling();
         Eventer.getDefault().unregister(getClass(), this);
         if (null != mUnbinder) mUnbinder.unbind();
-        App.getSingleton().removeActivity(this);
+        App.instance().removeActivity(this);
         super.onDestroy();
     }
 

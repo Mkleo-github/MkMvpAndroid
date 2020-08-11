@@ -65,7 +65,7 @@ public final class UiKit {
                         new TipsDialog.OnClickListener() {
                             @Override
                             public void onClicked() {
-                                App.getSingleton().exit();
+                                App.instance().exit();
                             }
                         }
                 );

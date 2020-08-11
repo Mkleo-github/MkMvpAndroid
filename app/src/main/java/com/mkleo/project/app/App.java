@@ -3,7 +3,9 @@ package com.mkleo.project.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+
 import androidx.multidex.MultiDex;
+
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -29,17 +31,39 @@ public class App extends Application {
     private int mScreenHeight = -1;
     //Activity管理器
     private final List<Activity> mActivityManager = new ArrayList<>();
-    //是否正在退出应用
-    private boolean isExiting = false;
     //APP实例
     private static App sApp;
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //执行MultiDex
+        MultiDex.install(base);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sApp = this;
+        //初始化错误捕获
+        initCrashHandler();
+        //获取屏幕宽高
+        getScreenSize();
+        //设置服务
+        HttpClient.linkService(AppService.class, Constants.MAIN_HOST);
+        //初始化数据库
+        FlowManager.init(
+                new FlowConfig.Builder(this)
+                        .build()
+        );
+    }
+
     /**
-     * 获取单例
+     * 获取实例
      *
      * @return
      */
-    public static App getSingleton() {
+    public static App instance() {
         return sApp;
     }
 
@@ -70,29 +94,6 @@ public class App extends Application {
         return mScreenHeight;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        sApp = this;
-        //初始化错误捕获
-        initCrashHandler();
-        //获取屏幕宽高
-        getScreenSize();
-        //设置服务
-        HttpClient.linkService(AppService.class, Constants.MAIN_HOST);
-        //初始化数据库
-        FlowManager.init(
-                new FlowConfig.Builder(this)
-                        .build()
-        );
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        //执行MultiDex
-        MultiDex.install(base);
-    }
 
     /**
      * 添加activity
@@ -101,8 +102,7 @@ public class App extends Application {
      */
     public void addActivity(Activity activity) {
         synchronized (mActivityManager) {
-            if (!isExiting)
-                mActivityManager.add(activity);
+            mActivityManager.add(activity);
         }
     }
 
@@ -137,7 +137,6 @@ public class App extends Application {
      */
     public void exit() {
         synchronized (mActivityManager) {
-            isExiting = true;
             for (Activity activity : mActivityManager) {
                 activity.finish();
             }
@@ -153,7 +152,7 @@ public class App extends Application {
      * 初始化崩溃处理器
      */
     private void initCrashHandler() {
-        CrashHandler.init(new CrashHandler.OnCrashListener() {
+        CrashHandler.setup(new CrashHandler.OnCrashListener() {
             @Override
             public void onCrash(String crashMsg) {
                 //发生异常

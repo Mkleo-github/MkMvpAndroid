@@ -20,9 +20,9 @@ public class CrashHandler {
     }
 
     /**
-     * 初始化,设置该CrashHandler为程序的默认处理器
+     * 加载,设置该CrashHandler为程序的默认处理器
      */
-    public static void init(OnCrashListener listener) {
+    public static void setup(OnCrashListener listener) {
         CrashHandler.sOnCrashListener = listener;
         sDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
