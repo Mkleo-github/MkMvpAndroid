@@ -36,13 +36,20 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
             mCompositeDisposable.clear();
             mCompositeDisposable = null;
         }
+        //解绑livedata
+        synchronized (mLiveDataHolder) {
+            //解绑
+            for (Map.Entry<String, MutableLiveData<?>> entry : mLiveDataHolder.entrySet()) {
+                entry.getValue().removeObservers(getView());
+            }
+            //清除livedata
+            mLiveDataHolder.clear();
+        }
         //清除软引用
         if (null != mViewReference) {
             mViewReference.clear();
             mViewReference = null;
         }
-        //清除livedata
-        mLiveDataHolder.clear();
     }
 
     /**
