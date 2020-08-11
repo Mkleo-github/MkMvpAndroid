@@ -1,6 +1,7 @@
 package com.mkleo.project.presenters;
 
 import com.mkleo.project.base.BasePresenter;
+import com.mkleo.project.base.LiveDataHolder;
 import com.mkleo.project.bean.http.LoginData;
 import com.mkleo.project.bean.http.base.Response;
 import com.mkleo.project.models.http.HttpClient;
@@ -12,10 +13,11 @@ public class SamplePresenter extends BasePresenter<SampleContract.View> implemen
 
     public static final String LIVEDATA_TIMER = "LIVEDATA_TIMER";
 
-    public SamplePresenter() {
-        this.<Integer>holdLiveData(LIVEDATA_TIMER);
-    }
 
+    @Override
+    protected void onCreateLiveDatas(LiveDataHolder holder) {
+        holder.<Integer>holdLiveData(LIVEDATA_TIMER);
+    }
 
     @Override
     public void login(String userName, String passWord, String imei) {

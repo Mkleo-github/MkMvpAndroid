@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -17,12 +15,18 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
 
+
     //弱引用,防止内存泄漏
     private WeakReference<V> mViewReference;
-    //RXJAVA内存回收
+    //RxJava内存回收
     private CompositeDisposable mCompositeDisposable;
-    //livedata持有
-    private final Map<String, MutableLiveData<?>> mLiveDataHolder = new HashMap<>();
+    //livedata持有者
+    private final LiveDataHolder mLiveDataHolder;
+
+    public BasePresenter() {
+        this.mLiveDataHolder = new LiveDataHolder();
+        this.onCreateLiveDatas(mLiveDataHolder);
+    }
 
     @Override
     public void attachView(V view) {
@@ -37,14 +41,7 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
             mCompositeDisposable = null;
         }
         //解绑livedata
-        synchronized (mLiveDataHolder) {
-            //解绑
-            for (Map.Entry<String, MutableLiveData<?>> entry : mLiveDataHolder.entrySet()) {
-                entry.getValue().removeObservers(getView());
-            }
-            //清除livedata
-            mLiveDataHolder.clear();
-        }
+        mLiveDataHolder.release(getView());
         //清除软引用
         if (null != mViewReference) {
             mViewReference.clear();
@@ -52,18 +49,6 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
         }
     }
 
-    /**
-     * 持有livedata
-     *
-     * @param key
-     * @return
-     */
-    protected <T> void holdLiveData(@NonNull String key) {
-        synchronized (mLiveDataHolder) {
-            MutableLiveData<T> liveData = new MutableLiveData<>();
-            mLiveDataHolder.put(key, liveData);
-        }
-    }
 
     /**
      * 获取livedata
@@ -73,9 +58,7 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
      * @return
      */
     public <T> MutableLiveData<T> getLiveData(@NonNull String key) {
-        synchronized (mLiveDataHolder) {
-            return (MutableLiveData<T>) mLiveDataHolder.get(key);
-        }
+        return mLiveDataHolder.getLiveData(key);
     }
 
     /**
@@ -100,4 +83,11 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
         mCompositeDisposable.add(disposable);
     }
 
+    /**
+     * 创建livedatas
+     *
+     * @param holder
+     */
+    protected void onCreateLiveDatas(LiveDataHolder holder) {
+    }
 }
