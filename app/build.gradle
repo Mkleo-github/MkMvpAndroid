@@ -56,4 +56,6 @@ dependencies {
     api 'com.github.Raizlabs.DBFlow:dbflow:4.2.4'
     //livedata
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    api files('libs/MkLog.aar')
 }

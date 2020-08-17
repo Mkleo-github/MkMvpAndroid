@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mkleo.logger.MkLog;
 import com.mkleo.project.models.eventbus.Eventer;
 import com.mkleo.project.models.eventbus.IEvent;
 import com.mkleo.project.models.eventbus.IEventReceiver;
-import com.mkleo.project.utils.MkLog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -114,6 +114,6 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
      * @param log
      */
     protected void printLog(String log) {
-        MkLog.print(getClass().getSimpleName(), log);
+        MkLog.d(getClass().getSimpleName(), log);
     }
 }

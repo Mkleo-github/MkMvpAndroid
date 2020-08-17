@@ -10,10 +10,13 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.mkleo.logger.LogConfig;
+import com.mkleo.logger.MkLog;
+import com.mkleo.logger.interceptor.LogFormatInterceptor;
+import com.mkleo.logger.printer.LogPrinter;
 import com.mkleo.project.models.http.HttpClient;
 import com.mkleo.project.models.http.AppService;
 import com.mkleo.project.utils.CrashHandler;
-import com.mkleo.project.utils.MkLog;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
@@ -45,6 +48,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         sApp = this;
+        MkLog.init(new LogConfig.Builder()
+                .addLogInterceptor(new LogFormatInterceptor())
+                .setLogPrinter(new LogPrinter())
+                .build());
         //初始化错误捕获
         initCrashHandler();
         //获取屏幕宽高
@@ -156,7 +163,7 @@ public class App extends Application {
             @Override
             public void onCrash(String crashMsg) {
                 //发生异常
-                MkLog.log(MkLog.LogLv.E, crashMsg);
+                MkLog.e("CoolMi.Talk", crashMsg);
                 exit();
             }
         });

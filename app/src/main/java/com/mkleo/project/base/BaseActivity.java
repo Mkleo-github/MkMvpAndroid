@@ -8,11 +8,11 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mkleo.logger.MkLog;
 import com.mkleo.project.app.App;
 import com.mkleo.project.models.eventbus.Eventer;
 import com.mkleo.project.models.eventbus.IEvent;
 import com.mkleo.project.models.eventbus.IEventReceiver;
-import com.mkleo.project.utils.MkLog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -26,8 +26,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
     protected Activity mAcitivty;
     private Unbinder mUnbinder;
     private UiKit mUiKit;
-    //权限接口
-    private PermissionImp mPermissionImp;
+    //权限管理
+    private PermissionManager mPermissionManager;
 
     @Override
     public final UiKit getUiKit() {
@@ -48,15 +48,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
         Eventer.getDefault().register(getClass(), this);
         onReady(savedInstanceState);
         //获取权限
-        mPermissionImp = new PermissionImp(getPermissionInterface());
-        mPermissionImp.requestPermissions(this);
+        mPermissionManager = new PermissionManager(getPermissionInterface());
+        mPermissionManager.requestPermissions(this);
     }
 
 
     @CallSuper
     @Override
     protected void onDestroy() {
-        onRecycling();
+        onRecycle();
         Eventer.getDefault().unregister(getClass(), this);
         if (null != mUnbinder) mUnbinder.unbind();
         App.instance().removeActivity(this);
@@ -67,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mPermissionImp.onActivityResult(requestCode);
+        mPermissionManager.onActivityResult(requestCode);
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
     /**
      * Activity正在回收
      */
-    protected abstract void onRecycling();
+    protected abstract void onRecycle();
 
 
     /**
@@ -113,6 +113,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
      * @param log
      */
     protected void printLog(String log) {
-        MkLog.print(getClass().getSimpleName(), log);
+        MkLog.d(getClass().getSimpleName(), log);
     }
 }

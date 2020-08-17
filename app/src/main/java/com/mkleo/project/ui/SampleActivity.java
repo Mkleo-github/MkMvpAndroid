@@ -43,7 +43,7 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
     }
 
     @Override
-    protected void onRecycling() {
+    protected void onRecycle() {
     }
 
     public void onLoginClicked(View view) {

@@ -6,5 +6,5 @@ public interface IPermissonInterface {
 
     void onAllPermissionsGranted();
 
-    void onSomePermissionsDenied();
+    void onSomePermissionsDenied(PermissionManager permissionManager);
 }
