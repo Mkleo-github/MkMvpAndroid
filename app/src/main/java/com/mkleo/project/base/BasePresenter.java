@@ -25,7 +25,7 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
 
     public BasePresenter() {
         this.mLiveDataHolder = new LiveDataHolder();
-        this.onCreateLiveDatas(mLiveDataHolder);
+        this.onCreateLiveData(mLiveDataHolder);
     }
 
     @Override
@@ -88,6 +88,6 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
      *
      * @param holder
      */
-    protected void onCreateLiveDatas(LiveDataHolder holder) {
+    protected void onCreateLiveData(LiveDataHolder holder) {
     }
 }

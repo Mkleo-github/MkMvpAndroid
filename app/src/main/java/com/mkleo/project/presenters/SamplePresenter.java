@@ -15,7 +15,7 @@ public class SamplePresenter extends BasePresenter<SampleContract.View> implemen
 
 
     @Override
-    protected void onCreateLiveDatas(LiveDataHolder holder) {
+    protected void onCreateLiveData(LiveDataHolder holder) {
         holder.<Integer>holdLiveData(LIVEDATA_TIMER);
     }
 
