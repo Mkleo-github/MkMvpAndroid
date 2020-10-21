@@ -3,10 +3,12 @@ package com.mkleo.project.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,18 +28,18 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
 
     protected Activity mActivity;
     protected Context mContext;
-    private UiKit mUIKit;
+    private UIKit mUIKit;
     private Unbinder mUnbinder;
     protected View mView;
 
     @Override
-    public final UiKit getUiKit() {
+    public final UIKit getUIKit() {
         return mUIKit;
     }
 
     @CallSuper
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         if (context instanceof Activity)
             this.mActivity = (Activity) context;
         this.mContext = context;
@@ -75,7 +77,7 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
     @CallSuper
     protected void onFragmentCreate() {
         mUnbinder = ButterKnife.bind(this, mView);
-        mUIKit = new UiKit(mActivity);
+        mUIKit = new UIKit(mActivity);
         Eventer.getDefault().register(getClass(), this);
         onFragmentReady();
     }

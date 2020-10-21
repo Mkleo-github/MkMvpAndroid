@@ -11,5 +11,5 @@ public interface IView extends LifecycleOwner {
      *
      * @return
      */
-    UiKit getUiKit();
+    UIKit getUIKit();
 }

@@ -25,13 +25,13 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
     //butterknife
     protected Activity mAcitivty;
     private Unbinder mUnbinder;
-    private UiKit mUiKit;
+    private UIKit mUIKit;
     //权限管理
     private PermissionManager mPermissionManager;
 
     @Override
-    public final UiKit getUiKit() {
-        return mUiKit;
+    public final UIKit getUIKit() {
+        return mUIKit;
     }
 
     @CallSuper
@@ -44,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
         //绑定bufferKnife
         mUnbinder = ButterKnife.bind(this);
         mAcitivty = this;
-        mUiKit = new UiKit(this);
+        mUIKit = new UIKit(this);
         Eventer.getDefault().register(getClass(), this);
         onReady(savedInstanceState);
         //获取权限

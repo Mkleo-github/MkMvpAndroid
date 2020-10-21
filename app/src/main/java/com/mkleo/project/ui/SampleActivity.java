@@ -37,7 +37,7 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
                 .observe(this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
-                        getUiKit().showToast("" + integer);
+                        getUIKit().showToast("" + integer);
                     }
                 });
     }
@@ -59,12 +59,12 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
 
     public void onTimerClicked(View view) {
         mSencond = 0;
-        getUiKit().removeAllCallbacks();
+        getUIKit().removeAllCallbacks();
         //计时开始
-        getUiKit().postDelayed(new Runnable() {
+        getUIKit().postDelayed(new Runnable() {
             @Override
             public void run() {
-                getUiKit().postDelayed(this, 1000);
+                getUIKit().postDelayed(this, 1000);
                 mSencond++;
                 mPresenter.<Integer>getLiveData(SamplePresenter.LIVEDATA_TIMER)
                         .postValue(mSencond);
