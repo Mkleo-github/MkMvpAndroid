@@ -2,7 +2,6 @@ package com.mkleo.project.bean.event;
 
 
 import com.mkleo.project.models.eventbus.Event;
-import com.mkleo.project.models.eventbus.IEvent;
 
 /**
  * 登录事件样例
@@ -10,7 +9,7 @@ import com.mkleo.project.models.eventbus.IEvent;
 public class LoginEvent extends Event<LoginEvent.Data> {
 
 
-    public static class Data implements IEvent.IData {
+    public static class Data {
         private final String userName;
         private final String password;
 

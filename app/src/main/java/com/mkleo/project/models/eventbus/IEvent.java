@@ -1,16 +1,12 @@
 package com.mkleo.project.models.eventbus;
 
-public interface IEvent<T extends IEvent.IData> {
+public interface IEvent<T> {
 
     T getData();
 
     void setData(T data);
 
-    Class[] getFilters();
+    Class<?>[] getFilters();
 
-    void addFilters(Class... filters);
-
-    interface IData {
-
-    }
+    void addFilters(Class<?>... filters);
 }

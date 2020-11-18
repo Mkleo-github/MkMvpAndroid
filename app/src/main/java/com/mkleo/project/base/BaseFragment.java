@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mkleo.logger.MkLog;
-import com.mkleo.project.models.eventbus.Eventer;
+import com.mkleo.project.models.eventbus.EventManager;
 import com.mkleo.project.models.eventbus.IEvent;
 import com.mkleo.project.models.eventbus.IEventReceiver;
 
@@ -67,7 +67,7 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
     }
 
     @Override
-    public void onEvent(IEvent event) {
+    public void onEvent(IEvent<?> event) {
 
     }
 
@@ -78,7 +78,7 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
     protected void onFragmentCreate() {
         mUnbinder = ButterKnife.bind(this, mView);
         mUIKit = new UIKit(mActivity);
-        Eventer.getDefault().register(getClass(), this);
+        EventManager.getDefault().register(getClass(), this);
         onFragmentReady();
     }
 
@@ -88,7 +88,7 @@ public abstract class BaseFragment extends Fragment implements IView, IEventRece
     @CallSuper
     protected void onFragmentDestroy() {
         onFragmentRelease();
-        Eventer.getDefault().unregister(getClass(), this);
+        EventManager.getDefault().unregister(getClass(), this);
         if (null != mUnbinder)
             mUnbinder.unbind();
     }

@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer;
 import com.mkleo.project.R;
 import com.mkleo.project.base.MvpActivity;
 import com.mkleo.project.bean.event.LoginEvent;
-import com.mkleo.project.models.eventbus.Eventer;
+import com.mkleo.project.models.eventbus.EventManager;
 import com.mkleo.project.models.eventbus.IEvent;
 import com.mkleo.project.models.eventbus.IEventReceiver;
 import com.mkleo.project.presenters.SamplePresenter;
@@ -48,7 +48,7 @@ public class SampleActivity extends MvpActivity<SamplePresenter> implements IEve
 
     public void onLoginClicked(View view) {
         //登录
-        Eventer.getDefault().post(new LoginEvent());
+        EventManager.getDefault().post(new LoginEvent());
         mPresenter.login("", "", "");
     }
 

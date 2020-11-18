@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mkleo.logger.MkLog;
 import com.mkleo.project.app.App;
-import com.mkleo.project.models.eventbus.Eventer;
+import com.mkleo.project.models.eventbus.EventManager;
 import com.mkleo.project.models.eventbus.IEvent;
 import com.mkleo.project.models.eventbus.IEventReceiver;
 
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
         mUnbinder = ButterKnife.bind(this);
         mAcitivty = this;
         mUIKit = new UIKit(this);
-        Eventer.getDefault().register(getClass(), this);
+        EventManager.getDefault().register(getClass(), this);
         onReady(savedInstanceState);
         //获取权限
         mPermissionManager = new PermissionManager(getPermissionInterface());
@@ -57,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView, I
     @Override
     protected void onDestroy() {
         onRecycle();
-        Eventer.getDefault().unregister(getClass(), this);
+        EventManager.getDefault().unregister(getClass(), this);
         if (null != mUnbinder) mUnbinder.unbind();
         App.instance().removeActivity(this);
         super.onDestroy();

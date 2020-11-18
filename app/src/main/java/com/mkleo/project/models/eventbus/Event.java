@@ -5,9 +5,9 @@ package com.mkleo.project.models.eventbus;
  *
  * @param <T> 事件数据
  */
-public abstract class Event<T extends IEvent.IData> implements IEvent<T> {
+public abstract class Event<T> implements IEvent<T> {
 
-    private Class[] filters;
+    private Class<?>[] filters;
     private T data;
 
     @Override
@@ -26,12 +26,12 @@ public abstract class Event<T extends IEvent.IData> implements IEvent<T> {
      * @param filters
      */
     @Override
-    public final void addFilters(Class... filters) {
+    public final void addFilters(Class<?>... filters) {
         this.filters = filters;
     }
 
     @Override
-    public final Class[] getFilters() {
+    public final Class<?>[] getFilters() {
         return filters;
     }
 }

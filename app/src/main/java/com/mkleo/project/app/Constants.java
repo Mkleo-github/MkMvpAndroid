@@ -8,9 +8,9 @@ import java.io.File;
 /**
  * 常量
  */
-public class Constants {
+public interface Constants {
 
-    public static final String[] REQUEST_PERMISSIONS = new String[]{
+    String[] REQUEST_PERMISSIONS = new String[]{
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_WIFI_STATE,
@@ -24,15 +24,13 @@ public class Constants {
             Manifest.permission.CAMERA,
     };
 
+    interface Path {
+        String GEN = Environment.getExternalStorageDirectory().getAbsolutePath(); // 根
 
-    public static class Path {
-        public static final String GEN = Environment.getExternalStorageDirectory().getAbsolutePath(); // 根
+        String DATA = GEN + File.separator + "data";
 
-        public static final String DATA = GEN + File.separator + "data";
-
-        public static final String HTTP_CACHE = DATA + "/HttpCache";
+        String HTTP_CACHE = DATA + "/HttpCache";
     }
 
-    public static final String MAIN_HOST = "https://www.baidu.com/";
-
+    String MAIN_HOST = "https://www.baidu.com/";
 }
